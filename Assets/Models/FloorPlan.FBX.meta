@@ -1,0 +1,201 @@
+fileFormatVersion: 2
+guid: 8dc25a7e39d51f146a8d8230e455b846
+timeCreated: 1471194682
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Door_Tops00
+    100002: Door_Tops01
+    100004: Door_Tops02
+    100006: Door_Tops03
+    100008: Door_Tops04
+    100010: Door_Tops05
+    100012: Door_Tops06
+    100014: Door_Tops07
+    100016: Door_Tops08
+    100018: Door_Tops09
+    100020: Door_Tops10
+    100022: Door_Tops11
+    100024: Door_Tops12
+    100026: Door_Tops13
+    100028: Door_Tops14
+    100030: Door_Tops15
+    100032: Door_Tops16
+    100034: Door_Tops17
+    100036: Door_Tops18
+    100038: Door_Tops19
+    100040: //RootNode
+    100042: RoundPillar
+    100044: SquarePillar01
+    100046: SquarePillar02
+    100048: SquarePillar03
+    100050: SquarePillar04
+    400000: Door_Tops00
+    400002: Door_Tops01
+    400004: Door_Tops02
+    400006: Door_Tops03
+    400008: Door_Tops04
+    400010: Door_Tops05
+    400012: Door_Tops06
+    400014: Door_Tops07
+    400016: Door_Tops08
+    400018: Door_Tops09
+    400020: Door_Tops10
+    400022: Door_Tops11
+    400024: Door_Tops12
+    400026: Door_Tops13
+    400028: Door_Tops14
+    400030: Door_Tops15
+    400032: Door_Tops16
+    400034: Door_Tops17
+    400036: Door_Tops18
+    400038: Door_Tops19
+    400040: //RootNode
+    400042: RoundPillar
+    400044: SquarePillar01
+    400046: SquarePillar02
+    400048: SquarePillar03
+    400050: SquarePillar04
+    2300000: Door_Tops00
+    2300002: Door_Tops01
+    2300004: Door_Tops02
+    2300006: Door_Tops03
+    2300008: Door_Tops04
+    2300010: Door_Tops05
+    2300012: Door_Tops06
+    2300014: Door_Tops07
+    2300016: Door_Tops08
+    2300018: Door_Tops09
+    2300020: Door_Tops10
+    2300022: Door_Tops11
+    2300024: Door_Tops12
+    2300026: Door_Tops13
+    2300028: Door_Tops14
+    2300030: Door_Tops15
+    2300032: Door_Tops16
+    2300034: Door_Tops17
+    2300036: Door_Tops18
+    2300038: Door_Tops19
+    2300040: //RootNode
+    2300042: RoundPillar
+    2300044: SquarePillar01
+    2300046: SquarePillar02
+    2300048: SquarePillar03
+    2300050: SquarePillar04
+    3300000: Door_Tops00
+    3300002: Door_Tops01
+    3300004: Door_Tops02
+    3300006: Door_Tops03
+    3300008: Door_Tops04
+    3300010: Door_Tops05
+    3300012: Door_Tops06
+    3300014: Door_Tops07
+    3300016: Door_Tops08
+    3300018: Door_Tops09
+    3300020: Door_Tops10
+    3300022: Door_Tops11
+    3300024: Door_Tops12
+    3300026: Door_Tops13
+    3300028: Door_Tops14
+    3300030: Door_Tops15
+    3300032: Door_Tops16
+    3300034: Door_Tops17
+    3300036: Door_Tops18
+    3300038: Door_Tops19
+    3300040: //RootNode
+    3300042: RoundPillar
+    3300044: SquarePillar01
+    3300046: SquarePillar02
+    3300048: SquarePillar03
+    3300050: SquarePillar04
+    4300000: FloorPlan
+    4300002: Door_Tops00
+    4300004: Door_Tops01
+    4300006: Door_Tops02
+    4300008: Door_Tops03
+    4300010: Door_Tops04
+    4300012: Door_Tops05
+    4300014: Door_Tops06
+    4300016: Door_Tops07
+    4300018: Door_Tops08
+    4300020: Door_Tops09
+    4300022: Door_Tops10
+    4300024: Door_Tops11
+    4300026: Door_Tops12
+    4300028: Door_Tops13
+    4300030: Door_Tops14
+    4300032: Door_Tops15
+    4300034: Door_Tops16
+    4300036: Door_Tops17
+    4300038: Door_Tops18
+    4300040: Door_Tops19
+    4300042: RoundPillar
+    4300044: SquarePillar03
+    4300046: SquarePillar02
+    4300048: SquarePillar04
+    4300050: SquarePillar01
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
