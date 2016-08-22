@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -13,14 +14,14 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject key;
 
 	private bool isMobile = false;
-	private bool movementAllowed = false;
+	public bool movementAllowed = false;
 
 	private AudioSource audio;
 	public AudioClip Voice2;
 	public AudioClip girlSound;
 	public AudioClip maleVoice;
 	public GameObject blinkingMobile;
-	public AudioClip keySound;
+	public AudioClip keySound, GhostWoman;
 
 	public AudioClip[] dialogues;
 	private int totalLength;
@@ -36,27 +37,44 @@ public class PlayerMovement : MonoBehaviour {
 
 	public float smoothTime = 0.3F;
 	private Vector3 velocity = Vector3.zero;
+	private bool isStart = true;
+	public GameObject controls;
+	private float controlTimer = 2f;
+	private GameObject gameController;
+
+	private bool isInitial = true;
+
+	public GameObject[] objectives;
+	public Sprite[] objectivesComplete;
 
 	// Use this for initialization
 	void Start () {
-		GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "Press 'A' to move.");
+		GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
 		audio = GameObject.Find ("GameController").GetComponent<AudioSource> ();
 
 		totalLength = dialogues.Length;
-		flashLight.SetActive (false);
+		//flashLight.SetActive (false);
 
 		forward = Camera.main.transform.forward;
 		forward. y = 0;
 		forward = Vector3.Normalize(forward);
 		right = Quaternion.Euler(new Vector3(0,90,0)) * forward;
 
+		gameController = GameObject.Find ("GameController");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
+		float rotatePosX = Input.GetAxis ("Horizontal");
 
-		if (Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.W)) {
+		float rotatePostY = Input.GetAxis ("Vertical");
+
+
+		Vector3 direction = new Vector3(rotatePosX, rotatePostY, 0f);
+
+		/*if (Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.W)) {
 			transform.position += transform.forward * Time.deltaTime * walkSpeed;
 		}
 
@@ -67,38 +85,38 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (Input.GetKeyUp(KeyCode.JoystickButton0) || Input.GetKeyUp(KeyCode.W)) {
 			gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
-		}
+		}*/
 
 		currentLerpTime += Time.deltaTime;
 
+
+
 		if (movementAllowed) {
-			float rotatePosX = Input.GetAxis ("Horizontal");
 
-			float rotatePostY = Input.GetAxis ("Vertical");
-
-			Vector3 direction = new Vector3(rotatePosX, 0f, rotatePostY);
-
-			if (rotatePosX > 0) {
+			/*if (rotatePosX > 0) {
 				GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
-			}
-			this.transform.Rotate(0, rotatePosX* rotationSpeed, 0);
-
-			/*float heading = Mathf.Atan2(rotatePosX,rotatePostY);
-
-			transform.rotation= Quaternion.LookRotation(direction);*/
-
-
-			/*if (direction.magnitude > 0.5f)
-			{
-				Vector3 rightMovement = right * 10f * Time.deltaTime * rotatePosX;
-				Vector3 upMovement = forward * 10f * Time.deltaTime * rotatePostY;
-
-				Vector3 heading = Vector3.Normalize(rightMovement+upMovement);
-				transform.forward = heading;
-
-				//transform.position += rightMovement;
-				//transform.position += upMovement;
 			}*/
+			//this.transform.Rotate(0, rotatePosX * rotationSpeed, 0);
+
+			if (!isStart) {
+				controlTimer -= Time.deltaTime;
+				if (controlTimer < 0) {
+					controls.SetActive (false);
+				}
+			}
+
+			if (rotatePosX != 0.0f || rotatePostY != 0.0f) {
+				if (isStart) {
+					isStart = false;
+				}
+				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
+				transform.rotation = rotation;
+				transform.position += transform.forward * Time.deltaTime * walkSpeed;
+				gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
+
+			} else {
+				gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
+			}
 
 		}
 
@@ -106,7 +124,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (Input.GetKey(KeyCode.JoystickButton1) || Input.GetKey(KeyCode.E)) {
 
-			if (spotLight.GetComponent<FlashLightScript> ().isAvailable && !movementAllowed) {
+			/*if (spotLight.GetComponent<FlashLightScript> ().isAvailable && !movementAllowed) {
 				audio.clip = Voice2;
 				audio.Play ();
 				movementAllowed = true;
@@ -115,21 +133,23 @@ public class PlayerMovement : MonoBehaviour {
 				gameObject.GetComponent<CapsuleCollider> ().enabled = true;
 				if (!flashLight.activeInHierarchy) {
 					flashLight.SetActive (true);
-					StartCoroutine (PlaySounds ());
+
 				}
 				GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "Use arrows to Left/Right!");
-			}
+			}*/
 
 			if (isMobile) {
 				GameObject.FindGameObjectWithTag ("Mobile").SetActive (false);
 				isMobile = false;
+				gameController.GetComponent<GameController> ().disableHelper ();
 				StartCoroutine (PlayAllDialogues ());
+				objectives [0].GetComponent<Image> ().sprite = objectivesComplete [0];
 			}
 
 			if (isKey) {
-				GetComponent<AudioSource>().clip = keySound;
-				GetComponent<AudioSource>().Play ();
+				StartCoroutine (keySounds ());
 				hasKey = true;
+				objectives [2].GetComponent<Image> ().sprite = objectivesComplete [2];
 				key.SetActive (false);
 			}
 
@@ -137,15 +157,35 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
+	public void supriseSound()
+	{
+		//Play initial sounds
+		StartCoroutine (PlaySounds ());
+	}
+
+	IEnumerator keySounds()
+	{
+		GetComponent<AudioSource>().clip = keySound;
+		GetComponent<AudioSource>().Play ();
+		yield return new WaitForSeconds (GetComponent<AudioSource>().clip.length + 0.5f);
+		GetComponent<AudioSource>().clip = GhostWoman;
+		GetComponent<AudioSource>().Play ();
+	}
+
 	IEnumerator PlaySounds()
 	{
-		yield return new WaitForSeconds (4f);
+		audio.clip = Voice2;
+		audio.Play ();
+		yield return new WaitForSeconds (audio.clip.length);
+
 		audio.clip = girlSound;
 		audio.Play ();
-		yield return new WaitForSeconds (3f);
+		yield return new WaitForSeconds (audio.clip.length+3f);
+		//Activate objective One.
+		objectives[0].SetActive(true);
 		audio.clip = maleVoice;
 		audio.Play ();
-		yield return new WaitForSeconds (5f);
+		yield return new WaitForSeconds (audio.clip.length);
 		blinkingMobile.GetComponent<AudioSource> ().enabled = true;
 	}
 
@@ -173,6 +213,7 @@ public class PlayerMovement : MonoBehaviour {
 		GetComponent<AudioSource>().clip = dialogues[6];
 		GetComponent<AudioSource>().Play ();
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+		objectives[1].SetActive(true);
 	}
 
 	void OnTriggerStay(Collider col)
@@ -185,25 +226,34 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (col.gameObject.tag == "Key") {
 			isKey = true;
+			gameController.GetComponent<GameController> ().enableHelper ();
 		}
 
 		if (col.gameObject.tag == "rightDoorCollider") {
+			if (isInitial) {
+				gameController.GetComponent<GameController> ().enableHelper ();
+			}
 			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E)) {
 				col.gameObject.GetComponent<OpenDoorScript> ().door.GetComponent<Animator> ().SetBool ("isRight", true);
 				col.gameObject.GetComponent<OpenDoorScript> ().isOpen = true;
+				isInitial = false;
 			}
 		}
 
 		if (col.gameObject.tag == "leftDoorCollider") {
+			if (isInitial) {
+				gameController.GetComponent<GameController> ().enableHelper ();
+			}
 			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E)) {
 				col.gameObject.GetComponent<OpenDoorScript> ().door.GetComponent<Animator> ().SetBool ("isLeft", true);
 				col.gameObject.GetComponent<OpenDoorScript> ().isOpen = true;
+				isInitial = false;
 			}
 		}
 
 	}
 
-	void OnTriggerLeave(Collider col)
+	void OnTriggerExit(Collider col)
 	{
 		if (col.gameObject.tag == "Mobile") {
 			isMobile = false;
@@ -211,6 +261,11 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (col.gameObject.tag == "Key") {
 			isKey = false;
+			gameController.GetComponent<GameController> ().disableHelper ();
+		}
+
+		if (col.gameObject.tag == "rightDoorCollider" || col.gameObject.tag == "leftDoorCollider") {
+			gameController.GetComponent<GameController> ().disableHelper ();
 		}
 
 	}

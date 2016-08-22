@@ -42,6 +42,10 @@ public class BlinkingScript : MonoBehaviour {
 			flickerRate = Random.Range (10, intensity);
 			blinkRate = Random.Range (0.005f, blinkDelay);
 			delayRate = Random.Range (0f, delayBetweenRing);
+			if (gameObject.tag == "light") {
+				gameobject.SetActive (true);
+				break;
+			}
 		}
 	}
 }

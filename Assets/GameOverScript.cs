@@ -21,9 +21,5 @@ public class GameOverScript : MonoBehaviour {
 			title.SetActive (false);
 		}
 
-		if (duration < 0) {
-			Application.Quit ();
-		}
-
 	}
 }

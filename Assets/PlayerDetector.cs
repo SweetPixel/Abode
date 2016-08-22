@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class PlayerDetector : MonoBehaviour {
 
@@ -13,6 +14,10 @@ public class PlayerDetector : MonoBehaviour {
 
 
 	public GameObject restart;
+	private bool isRestart = false;
+	public  float restartTimer = 1.5f;
+
+	public GameObject flashLight;
 
 	// Use this for initialization
 	void Start () {
@@ -28,12 +33,21 @@ public class PlayerDetector : MonoBehaviour {
 			
 			float step = speed * Time.deltaTime;
 			//gameObject.transform.LookAt (player.position);
-			gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, new Vector3 (player.position.x, gameObject.transform.position.y, player.position.z), step);
-			transform.LookAt (new Vector3 (player.position.x, gameObject.transform.position.y, player.position.z));
+			if (player != null) {
+				gameObject.transform.position = Vector3.MoveTowards (gameObject.transform.position, new Vector3 (player.position.x, gameObject.transform.position.y, player.position.z), step);
+				transform.LookAt (new Vector3 (player.position.x, gameObject.transform.position.y, player.position.z));
+			}
 		}
 
 		if (timerStart && duration > 0) {
 			duration = duration - Time.deltaTime;
+		}
+
+		if (isRestart) {
+			restartTimer -= Time.deltaTime;
+			if (restartTimer < 0) {
+				Application.LoadLevelAsync ("Gameplay");
+			}
 		}
 
 	}
@@ -65,8 +79,16 @@ public class PlayerDetector : MonoBehaviour {
 	{
 		Debug.Log (col.gameObject.name);
 		if (col.gameObject.name == "Player") {
+			Instantiate (flashLight, col.gameObject.transform.position, gameObject.transform.rotation);
+			col.gameObject.GetComponent<AudioSource> ().enabled = false;
 			Destroy (col.gameObject);
-			restart.SetActive (true);
+
+			GameObject.Find ("Panel").GetComponent<Image> ().color = Color.white;
+			GameObject.Find ("Panel").GetComponent<FadeInScript> ().enabled = false;
+			GameObject.Find ("Panel").GetComponent<FadeOutScript> ().enabled = true;
+
+			//restart.SetActive (true);
+			isRestart = true;
 		}
 	}
 

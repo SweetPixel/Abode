@@ -7,4 +7,10 @@ public class ButtonClick : MonoBehaviour {
 	{
 		Application.LoadLevelAsync ("Gameplay");
 	}
+
+	public void QuitGame()
+	{
+		Application.Quit ();
+	}
+
 }
