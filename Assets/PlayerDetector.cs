@@ -54,7 +54,7 @@ public class PlayerDetector : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
-		Debug.Log (col.gameObject.name);
+//		Debug.Log (col.gameObject.name);
 		/*if (col.gameObject.name == "lightRange") {
 			spotted = false;
 			//Destroy (gameObject);
@@ -77,7 +77,7 @@ public class PlayerDetector : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-		Debug.Log (col.gameObject.name);
+		//Debug.Log (col.gameObject.name);
 		if (col.gameObject.name == "Player") {
 			Instantiate (flashLight, col.gameObject.transform.position, gameObject.transform.rotation);
 			col.gameObject.GetComponent<AudioSource> ().enabled = false;

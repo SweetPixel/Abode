@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using XboxCtrlrInput;
 
 public class TimerScript : MonoBehaviour {
 
@@ -37,13 +38,14 @@ public class TimerScript : MonoBehaviour {
 			}
 		}
 		if (duration < 0) {
-			Application.LoadLevelAsync ("Gameplay");
+			//Application.LoadLevelAsync ("Gameplay");
+			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
 		}
 
 
 
 		if (isSkipped) {
-			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E)) {
+			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E) || XCI.GetButton(XboxButton.B)) {
 				duration = 3;
 				poem.SetActive (false);
 				isSkipped = false;
@@ -58,7 +60,8 @@ public class TimerScript : MonoBehaviour {
 		}
 		if (duration < 0) {
 			PlayerPrefs.SetInt ("playCount", 1);
-			Application.LoadLevelAsync ("Gameplay");
+			//Application.LoadLevelAsync ("Gameplay");
+			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
 		}
 	}
 }

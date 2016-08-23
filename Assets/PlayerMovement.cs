@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using XboxCtrlrInput;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -47,6 +48,8 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject[] objectives;
 	public Sprite[] objectivesComplete;
 
+	public XboxController playerNumber = XboxController.First;
+
 	// Use this for initialization
 	void Start () {
 		GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
@@ -70,7 +73,6 @@ public class PlayerMovement : MonoBehaviour {
 		float rotatePosX = Input.GetAxis ("Horizontal");
 
 		float rotatePostY = Input.GetAxis ("Vertical");
-
 
 		Vector3 direction = new Vector3(rotatePosX, rotatePostY, 0f);
 
@@ -120,6 +122,7 @@ public class PlayerMovement : MonoBehaviour {
 
 				// Smoothly rotate towards the target point.
 				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
+
 			}
 
 			if (!isStart) {
@@ -133,8 +136,10 @@ public class PlayerMovement : MonoBehaviour {
 				if (isStart) {
 					isStart = false;
 				}
-//				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
-//				transform.rotation = rotation;
+				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
+				if (rotation.x != 0.0 || rotation.y != 0.0 || rotation.z != 0.0) {
+					transform.rotation = rotation;
+				}
 				transform.position += transform.forward * Time.deltaTime * walkSpeed;
 				gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
 
@@ -146,7 +151,7 @@ public class PlayerMovement : MonoBehaviour {
 
 
 
-		if (Input.GetKey(KeyCode.JoystickButton1) || Input.GetKey(KeyCode.E)) {
+		if (Input.GetKey(KeyCode.JoystickButton1) || Input.GetKey(KeyCode.E) || XCI.GetButton(XboxButton.B)) {
 
 			/*if (spotLight.GetComponent<FlashLightScript> ().isAvailable && !movementAllowed) {
 				audio.clip = Voice2;
@@ -217,7 +222,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		GetComponent<AudioSource>().clip = dialogues[0];
 		GetComponent<AudioSource>().Play ();
-		Debug.Log (GetComponent<AudioSource>().clip);
+		//Debug.Log (GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[1];
 		GetComponent<AudioSource>().Play ();
@@ -242,7 +247,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
-		Debug.Log (col.gameObject.tag);
+//		Debug.Log (col.gameObject.tag);
 
 		if (col.gameObject.tag == "Mobile") {
 			isMobile = true;
@@ -257,7 +262,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (isInitial) {
 				gameController.GetComponent<GameController> ().enableHelper ();
 			}
-			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E)) {
+			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E) || XCI.GetButton(XboxButton.B)) {
 				col.gameObject.GetComponent<OpenDoorScript> ().door.GetComponent<Animator> ().SetBool ("isRight", true);
 				col.gameObject.GetComponent<OpenDoorScript> ().isOpen = true;
 				isInitial = false;
@@ -268,7 +273,7 @@ public class PlayerMovement : MonoBehaviour {
 			if (isInitial) {
 				gameController.GetComponent<GameController> ().enableHelper ();
 			}
-			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E)) {
+			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E) || XCI.GetButton(XboxButton.B)) {
 				col.gameObject.GetComponent<OpenDoorScript> ().door.GetComponent<Animator> ().SetBool ("isLeft", true);
 				col.gameObject.GetComponent<OpenDoorScript> ().isOpen = true;
 				isInitial = false;
