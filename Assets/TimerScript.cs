@@ -45,6 +45,7 @@ public class TimerScript : MonoBehaviour {
 		if (isSkipped) {
 			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E)) {
 				duration = 3;
+				poem.SetActive (false);
 				isSkipped = false;
 			}
 		}
