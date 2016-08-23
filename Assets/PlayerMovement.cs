@@ -47,6 +47,8 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject[] objectives;
 	public Sprite[] objectivesComplete;
 
+    private float tempWalkSpeed;//use for when player collide with door,furniture or wall wallk speed goes to 0 so it is used to recover the walk speed again
+
 	// Use this for initialization
 	void Start () {
 		GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
@@ -61,7 +63,7 @@ public class PlayerMovement : MonoBehaviour {
 		right = Quaternion.Euler(new Vector3(0,90,0)) * forward;
 
 		gameController = GameObject.Find ("GameController");
-
+        tempWalkSpeed = walkSpeed;
 	}
 	
 	// Update is called once per frame
@@ -218,7 +220,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
-		Debug.Log (col.gameObject.tag);
+		
 
 		if (col.gameObject.tag == "Mobile") {
 			isMobile = true;
@@ -272,7 +274,18 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+        //Debug.Log(col.gameObject.tag);
+        if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors" || col.gameObject.tag == "Furniture")
+        {
+            walkSpeed = 0;
+        }
+		//gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
 	}
+
+    void OnCollisionExit(Collision coll)
+    {
+        //Debug.Log(coll.gameObject.tag);
+        walkSpeed = tempWalkSpeed;
+    }
 
 }

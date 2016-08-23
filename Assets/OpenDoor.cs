@@ -51,7 +51,7 @@ public class OpenDoor : MonoBehaviour {
 	void OnTriggerEnter(Collider col)
 	{
 
-		Debug.Log (col.gameObject.name);
+		//Debug.Log (col.gameObject.name);
 
 		if (col.gameObject.name == "lightRange") {
 			return;
