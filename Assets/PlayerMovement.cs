@@ -1,3 +1,4 @@
+
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ using XboxCtrlrInput;
 public class PlayerMovement : MonoBehaviour {
 
 	public float walkSpeed = 5f;
-	public float rotationSpeed = 2f;
+	public float rotationSpeed = 5f;
 
 	//Lights
 	public GameObject flashLight;
@@ -121,8 +122,12 @@ public class PlayerMovement : MonoBehaviour {
 				Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
 				// Smoothly rotate towards the target point.
+<<<<<<< HEAD
 				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
 
+=======
+				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+>>>>>>> origin/master
 			}
 
 			if (!isStart) {
@@ -301,7 +306,16 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+		 if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors" || col.gameObject.tag == "Furniture")
+        {
+            walkSpeed = 0;
+        }
 	}
 
+    void OnCollisionExit(Collision coll)
+    {
+        walkSpeed = 5f;
+    }
+
 }
+
