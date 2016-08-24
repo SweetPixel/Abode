@@ -66,11 +66,6 @@ public class OpenDoor : MonoBehaviour {
 
 	void OnTriggerExit(Collider col)
 	{
-<<<<<<< HEAD
-		//Debug.Log (col.gameObject.name);
-=======
-//		Debug.Log (col.gameObject.name);
->>>>>>> refs/remotes/SweetPixel/master
 
 		if (col.gameObject.name == "lightRange") {
 			return;
