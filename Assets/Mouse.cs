@@ -14,7 +14,7 @@ public class Mouse : MonoBehaviour {
 
 	void FixedUpdate () 
 	{
-		Debug.Log ("hello");
+		//Debug.Log ("hello");
 		// Generate a plane that intersects the transform's position with an upwards normal.
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
 

@@ -19,7 +19,7 @@ public class OpenDoor : MonoBehaviour {
 	{
 		if (isOpening && !isClosing) {
 
-			Debug.Log ("IsOpening");
+			//Debug.Log ("IsOpening");
 
 
 			isOpening = false;
@@ -51,7 +51,6 @@ public class OpenDoor : MonoBehaviour {
 	void OnTriggerEnter(Collider col)
 	{
 
-		//Debug.Log (col.gameObject.name);
 
 		if (col.gameObject.name == "lightRange") {
 			return;
@@ -67,7 +66,11 @@ public class OpenDoor : MonoBehaviour {
 
 	void OnTriggerExit(Collider col)
 	{
+<<<<<<< HEAD
 		//Debug.Log (col.gameObject.name);
+=======
+//		Debug.Log (col.gameObject.name);
+>>>>>>> refs/remotes/SweetPixel/master
 
 		if (col.gameObject.name == "lightRange") {
 			return;

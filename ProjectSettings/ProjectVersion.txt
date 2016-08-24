@@ -1,6 +1,2 @@
-<<<<<<< HEAD
 m_EditorVersion: 5.3.5f1
-=======
-m_EditorVersion: 5.4.0f3
->>>>>>> Imran_Branch
 m_StandardAssetsVersion: 0

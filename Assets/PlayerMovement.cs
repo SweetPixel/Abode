@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 using UnityEngine;
+=======
+﻿using UnityEngine;
+>>>>>>> refs/remotes/SweetPixel/master
 using System.Collections;
 using UnityEngine.UI;
+using XboxCtrlrInput;
 
 public class PlayerMovement : MonoBehaviour {
 
@@ -47,6 +52,8 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject[] objectives;
 	public Sprite[] objectivesComplete;
 
+	public XboxController playerNumber = XboxController.First;
+
 	// Use this for initialization
 	void Start () {
 		GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
@@ -70,7 +77,6 @@ public class PlayerMovement : MonoBehaviour {
 		float rotatePosX = Input.GetAxis ("Horizontal");
 
 		float rotatePostY = Input.GetAxis ("Vertical");
-
 
 		Vector3 direction = new Vector3(rotatePosX, rotatePostY, 0f);
 
@@ -119,6 +125,7 @@ public class PlayerMovement : MonoBehaviour {
 				Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
 				// Smoothly rotate towards the target point.
+<<<<<<< HEAD
 				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
 			}
 
@@ -202,6 +209,94 @@ public class PlayerMovement : MonoBehaviour {
 		audio.Play ();
 		yield return new WaitForSeconds (audio.clip.length);
 
+=======
+				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
+
+			}
+
+			if (!isStart) {
+				controlTimer -= Time.deltaTime;
+				if (controlTimer < 0) {
+					controls.SetActive (false);
+				}
+			}
+
+			if (rotatePosX != 0.0f || rotatePostY != 0.0f) {
+				if (isStart) {
+					isStart = false;
+				}
+				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
+				if (rotation.x != 0.0 || rotation.y != 0.0 || rotation.z != 0.0) {
+					transform.rotation = rotation;
+				}
+				transform.position += transform.forward * Time.deltaTime * walkSpeed;
+				gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
+
+			} else {
+				gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
+			}
+
+		}
+
+
+
+		if (Input.GetKey(KeyCode.JoystickButton1) || Input.GetKey(KeyCode.E) || XCI.GetButton(XboxButton.B)) {
+
+			/*if (spotLight.GetComponent<FlashLightScript> ().isAvailable && !movementAllowed) {
+				audio.clip = Voice2;
+				audio.Play ();
+				movementAllowed = true;
+				spotLight.SetActive (false);
+
+				gameObject.GetComponent<CapsuleCollider> ().enabled = true;
+				if (!flashLight.activeInHierarchy) {
+					flashLight.SetActive (true);
+
+				}
+				GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "Use arrows to Left/Right!");
+			}*/
+
+			if (isMobile) {
+				GameObject.FindGameObjectWithTag ("Mobile").SetActive (false);
+				isMobile = false;
+				gameController.GetComponent<GameController> ().disableHelper ();
+				StartCoroutine (PlayAllDialogues ());
+				objectives [0].GetComponent<Image> ().sprite = objectivesComplete [0];
+			}
+
+			if (isKey) {
+				StartCoroutine (keySounds ());
+				hasKey = true;
+				objectives [2].GetComponent<Image> ().sprite = objectivesComplete [2];
+				key.SetActive (false);
+			}
+
+		}
+
+	}
+
+	public void supriseSound()
+	{
+		//Play initial sounds
+		StartCoroutine (PlaySounds ());
+	}
+
+	IEnumerator keySounds()
+	{
+		GetComponent<AudioSource>().clip = keySound;
+		GetComponent<AudioSource>().Play ();
+		yield return new WaitForSeconds (GetComponent<AudioSource>().clip.length + 0.5f);
+		GetComponent<AudioSource>().clip = GhostWoman;
+		GetComponent<AudioSource>().Play ();
+	}
+
+	IEnumerator PlaySounds()
+	{
+		audio.clip = Voice2;
+		audio.Play ();
+		yield return new WaitForSeconds (audio.clip.length);
+
+>>>>>>> refs/remotes/SweetPixel/master
 		audio.clip = girlSound;
 		audio.Play ();
 		yield return new WaitForSeconds (audio.clip.length+3f);
@@ -217,7 +312,11 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		GetComponent<AudioSource>().clip = dialogues[0];
 		GetComponent<AudioSource>().Play ();
+<<<<<<< HEAD
 		Debug.Log (GetComponent<AudioSource>().clip);
+=======
+		//Debug.Log (GetComponent<AudioSource>().clip);
+>>>>>>> refs/remotes/SweetPixel/master
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[1];
 		GetComponent<AudioSource>().Play ();
@@ -242,7 +341,11 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnTriggerStay(Collider col)
 	{
+<<<<<<< HEAD
 		//Debug.Log (col.gameObject.tag);
+=======
+//		Debug.Log (col.gameObject.tag);
+>>>>>>> refs/remotes/SweetPixel/master
 
 		if (col.gameObject.tag == "Mobile") {
 			isMobile = true;
@@ -253,6 +356,7 @@ public class PlayerMovement : MonoBehaviour {
 			gameController.GetComponent<GameController> ().enableHelper ();
 		}
 
+<<<<<<< HEAD
         //if (col.gameObject.tag == "rightDoorCollider")
         //{
         //    if (isInitial)
@@ -286,6 +390,29 @@ public class PlayerMovement : MonoBehaviour {
         //}
 
         //Debug.Log(col.gameObject.tag);
+=======
+		if (col.gameObject.tag == "rightDoorCollider") {
+			if (isInitial) {
+				gameController.GetComponent<GameController> ().enableHelper ();
+			}
+			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E) || XCI.GetButton(XboxButton.B)) {
+				col.gameObject.GetComponent<OpenDoorScript> ().door.GetComponent<Animator> ().SetBool ("isRight", true);
+				col.gameObject.GetComponent<OpenDoorScript> ().isOpen = true;
+				isInitial = false;
+			}
+		}
+
+		if (col.gameObject.tag == "leftDoorCollider") {
+			if (isInitial) {
+				gameController.GetComponent<GameController> ().enableHelper ();
+			}
+			if (Input.GetKey (KeyCode.JoystickButton1) || Input.GetKey (KeyCode.E) || XCI.GetButton(XboxButton.B)) {
+				col.gameObject.GetComponent<OpenDoorScript> ().door.GetComponent<Animator> ().SetBool ("isLeft", true);
+				col.gameObject.GetComponent<OpenDoorScript> ().isOpen = true;
+				isInitial = false;
+			}
+		}
+>>>>>>> refs/remotes/SweetPixel/master
 
 	}
 
@@ -308,6 +435,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
+<<<<<<< HEAD
         if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors" || col.gameObject.tag == "Furniture")
         {
             walkSpeed = 0;
@@ -340,4 +468,9 @@ public class PlayerMovement : MonoBehaviour {
         coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<Animator>().SetBool("isLeft", true);
         coll.gameObject.GetComponent<OpenDoorScript>().isOpen = true;
     }
+=======
+		gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+	}
+
+>>>>>>> refs/remotes/SweetPixel/master
 }

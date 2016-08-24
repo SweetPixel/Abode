@@ -25,13 +25,13 @@ public class controler : MonoBehaviour {
 
 		float x = Input.GetAxis ("Horizontal");
 		float z = Input.GetAxis ("Vertical");
+		//Debug.Log (x +"+"+ z);
 		if (x >= 1 || x <= -1 || z >= 1 || z <= -1) {
 
 			Quaternion rotation = Quaternion.LookRotation (new Vector3 (relativePosx,0,relativePosz));
 			transform.rotation = rotation;
 
 		}
-
 
 	      if (Input.GetKey (KeyCode.A) || Input.GetKey (KeyCode.W) || Input.GetKey (KeyCode.S) || Input.GetKey (KeyCode.D)) {
 			transform.Translate ((Vector3.forward * Time.deltaTime * currentSpeed ));
@@ -46,7 +46,6 @@ public class controler : MonoBehaviour {
 			
 			currentSpeed  = 0;
 		}
-
 
 
 		target.transform.rotation = GameCamera.transform.rotation;
