@@ -49,6 +49,8 @@ public class PlayerMovement : MonoBehaviour {
 	public Sprite[] objectivesComplete;
 
 	public XboxController playerNumber = XboxController.First;
+	private Vector3 prePos = Vector3.zero;
+
 
 	// Use this for initialization
 	void Start () {
@@ -104,7 +106,7 @@ public class PlayerMovement : MonoBehaviour {
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
 			// Generate a ray from the cursor position
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
+			Vector3 currnetPos = Input.mousePosition;
 			// Determine the point where the cursor ray intersects the plane.
 			// This will be the point that the object must look towards to be looking at the mouse.
 			// Raycasting to a Plane object only gives us a distance, so we'll have to take the distance,
@@ -121,8 +123,11 @@ public class PlayerMovement : MonoBehaviour {
 				Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
 				// Smoothly rotate towards the target point.
-				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
-
+				if (prePos != currnetPos) {
+					prePos = currnetPos;
+					Cursor.visible = true;
+					transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
+				}
 			}
 
 			if (!isStart) {
@@ -137,7 +142,8 @@ public class PlayerMovement : MonoBehaviour {
 					isStart = false;
 				}
 				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
-				if (rotation.x != 0.0 || rotation.y != 0.0 || rotation.z != 0.0) {
+				if ((rotation.x != 0.0 || rotation.y != 0.0 || rotation.z != 0.0))  {
+					Cursor.visible = false;
 					transform.rotation = rotation;
 				}
 				transform.position += transform.forward * Time.deltaTime * walkSpeed;
