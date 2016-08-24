@@ -13,7 +13,7 @@ public class FadeOutScript : MonoBehaviour {
 	void Start () {
 		light.SetActive (false);
 		controls = GameObject.Find ("Controls");
-		controls.SetActive (false);
+		//controls.SetActive (false);
 	}
 
 	// Update is called once per frame

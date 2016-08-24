@@ -1,6 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+public enum DoorState
+{
+    OPEN,
+    CLOSE
+};
+
 public class OpenDoorScript : MonoBehaviour {
 
 	public GameObject door;
@@ -8,7 +14,9 @@ public class OpenDoorScript : MonoBehaviour {
 	public bool isRight = false;
 
 	public bool isOpen = false;
-	private float duration = 2f;
+	private float duration = 0.5f;
+
+    public bool enableDoorClose;
 
 	void Update()
 	{
@@ -30,12 +38,16 @@ public class OpenDoorScript : MonoBehaviour {
 		}*/
 
 		if (isOpen) {
-			duration = duration - Time.deltaTime;
+            if (enableDoorClose)
+            {
+                duration = duration - Time.deltaTime;
+            }
 			if (duration < 0) {
 				door.GetComponent<Animator> ().SetBool ("isRight", false);
 				door.GetComponent<Animator> ().SetBool ("isLeft", false);
-				duration = 2f;
+				duration = 0.5f;
 				isOpen = false;
+                enableDoorClose = false;
 			}
 		}
 
