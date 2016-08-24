@@ -18,11 +18,10 @@ public class PlayerDetector : MonoBehaviour {
 	public  float restartTimer = 1.5f;
 
 	public GameObject flashLight;
-    private float tempSpeed;//use to recover speed over again when it get 0 on collision
 
 	// Use this for initialization
 	void Start () {
-        tempSpeed = speed;
+	
 	}
 	
 	// Update is called once per frame
@@ -55,11 +54,7 @@ public class PlayerDetector : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
-<<<<<<< HEAD
 //		Debug.Log (col.gameObject.name);
-=======
-		//Debug.Log (col.gameObject.name);
->>>>>>> origin/master
 		/*if (col.gameObject.name == "lightRange") {
 			spotted = false;
 			//Destroy (gameObject);
@@ -95,6 +90,6 @@ public class PlayerDetector : MonoBehaviour {
 			//restart.SetActive (true);
 			isRestart = true;
 		}
-        
 	}
+
 }
