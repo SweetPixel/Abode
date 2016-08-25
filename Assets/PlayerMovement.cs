@@ -188,15 +188,18 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		audio.clip = Voice2;
 		audio.Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(audio.clip);
 		yield return new WaitForSeconds (audio.clip.length);
 
 		audio.clip = girlSound;
 		audio.Play ();
+
 		yield return new WaitForSeconds (audio.clip.length+3f);
 		//Activate objective One.
 		objectives[0].SetActive(true);
 		audio.clip = maleVoice;
 		audio.Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(audio.clip);
 		yield return new WaitForSeconds (audio.clip.length);
 		blinkingMobile.GetComponent<AudioSource> ().enabled = true;
 	}
@@ -214,6 +217,7 @@ public class PlayerMovement : MonoBehaviour {
 		yield return new WaitForSeconds (GetComponent<AudioSource>().clip.length + 0.5f);
 		GetComponent<AudioSource>().clip = GhostWoman;
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 	}
 
 
@@ -221,28 +225,34 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		GetComponent<AudioSource>().clip = dialogues[0];
 		GetComponent<AudioSource>().Play ();
-
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		Debug.Log (GetComponent<AudioSource>().clip);
 		//Debug.Log (GetComponent<AudioSource>().clip);
 
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[1];
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[2];
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[3];
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[4];
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[5];
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[6];
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		objectives[1].SetActive(true);
 	}
