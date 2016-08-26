@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject spotLight;
 	public GameObject key;
 
-	private bool isMobile = false;
+	public bool isMobile = false;
 	public bool movementAllowed = false;
 
 	private AudioSource audio;
@@ -24,13 +24,14 @@ public class PlayerMovement : MonoBehaviour {
 	public AudioClip maleVoice;
 	public GameObject blinkingMobile;
 	public AudioClip keySound, GhostWoman;
+    public bool hasMobileAttende=false;
 
 	public AudioClip[] dialogues;
 	private int totalLength;
 	public bool isOpen = false;
 	private bool isKey = false;
 	public bool hasKey = false;
-
+    private bool isPoemPlayed = false;
 	public AudioClip clockRoomDialogue;
 
 	Vector3 forward;
@@ -140,6 +141,7 @@ public class PlayerMovement : MonoBehaviour {
 //				transform.rotation = rotation;
 				transform.position += transform.forward * Time.deltaTime * walkSpeed;
 				gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
+                //Debug.Log("hello");
 
 			} else {
 				gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
@@ -168,17 +170,21 @@ public class PlayerMovement : MonoBehaviour {
 			if (isMobile) {
 				GameObject.FindGameObjectWithTag ("Mobile").SetActive (false);
 				isMobile = false;
+                hasMobileAttende = true;
 				gameController.GetComponent<GameController> ().disableHelper ();
 				StartCoroutine (PlayAllDialogues());
 				objectives [0].GetComponent<Image> ().sprite = objectivesComplete [0];
-			}
-
-			if (isKey) {
-				StartCoroutine (keySounds ());
-				hasKey = true;
-				objectives [2].GetComponent<Image> ().sprite = objectivesComplete [2];
-				key.SetActive (false);
-			}
+                Debug.Log("Mobile Attended");
+            }
+            else if (isKey && isPoemPlayed==false)
+            {
+                isPoemPlayed = true;
+                StartCoroutine(keySounds());
+                hasKey = true;
+                objectives[2].GetComponent<Image>().sprite = objectivesComplete[2];
+                key.SetActive(false);
+                Debug.Log("Got KEy");
+            }
 
 		}
 

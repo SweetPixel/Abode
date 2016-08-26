@@ -106,7 +106,7 @@ public class GameController : MonoBehaviour {
     public void LoadNextText(AudioSubtitle audioSub,int currentTextID)
     {
         currentTextID += 1;
-        Debug.Log(currentTextID);
+        //Debug.Log(currentTextID);
         try
         {
             if (currentTextID <= audioSub.textForAudio.Length)

@@ -13,7 +13,7 @@ public class ExitdoorScript : MonoBehaviour {
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.name == "Player") {
-			if (col.gameObject.GetComponent<PlayerMovement> ().hasKey && gameObject.name == "leftCollider (16)") {
+			if (col.gameObject.GetComponent<PlayerMovement> ().hasKey && gameObject.name == "leftCollider (16)"&& col.gameObject.GetComponent<PlayerMovement>().hasMobileAttende) {
 				door.GetComponent<Animator> ().SetBool ("isRight", true);
 				StartCoroutine (endLevel ());
 				GameObject.Find ("Player").GetComponent<PlayerMovement> ().objectives [2].GetComponent<Image> ().sprite = GameObject.Find ("Player").GetComponent<PlayerMovement> ().objectivesComplete [2];
