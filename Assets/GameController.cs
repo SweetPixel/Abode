@@ -101,7 +101,6 @@ public class GameController : MonoBehaviour {
         subTitleText.gameObject.SetActive(true);
         subTitleText.text = subText;
         ShownTime=0;
-        Debug.Log("Load Sub");
     }
 
     public void LoadNextText(AudioSubtitle audioSub,int currentTextID)

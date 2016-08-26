@@ -244,7 +244,7 @@ public class PlayerMovement : MonoBehaviour {
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[4];
 		GetComponent<AudioSource>().Play ();
-        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
+        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
 		GetComponent<AudioSource>().clip = dialogues[5];
 		GetComponent<AudioSource>().Play ();
