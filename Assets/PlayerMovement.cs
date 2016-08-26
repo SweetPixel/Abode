@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour {
 	public Sprite[] objectivesComplete;
 
 	public XboxController playerNumber = XboxController.First;
+	private Vector3 prePos = Vector3.zero;
 
 	// Use this for initialization
 	void Start () {
@@ -106,6 +107,8 @@ public class PlayerMovement : MonoBehaviour {
 			// Generate a ray from the cursor position
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 
+			Vector3 currnetPos = Input.mousePosition;
+
 			// Determine the point where the cursor ray intersects the plane.
 			// This will be the point that the object must look towards to be looking at the mouse.
 			// Raycasting to a Plane object only gives us a distance, so we'll have to take the distance,
@@ -122,7 +125,11 @@ public class PlayerMovement : MonoBehaviour {
 				Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
 				// Smoothly rotate towards the target point.
-				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+				if (prePos != currnetPos) {
+					prePos = currnetPos;
+					Cursor.visible = true;
+					transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
+				}
 			}
 
 			if (!isStart) {
@@ -136,20 +143,22 @@ public class PlayerMovement : MonoBehaviour {
 				if (isStart) {
 					isStart = false;
 				}
-//				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
-//				transform.rotation = rotation;
-				transform.position += transform.forward * Time.deltaTime * walkSpeed;
-				gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
+				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
+				if ((rotation.x != 0.0 || rotation.y != 0.0 || rotation.z != 0.0)) {
+					Cursor.visible = false;
+					transform.rotation = rotation;
+				}
+					transform.position += transform.forward * Time.deltaTime * walkSpeed;
+					gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
 
-			} else {
-				gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
-			}
-
+				} else {
+					gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
+				}
 		}
 
 
 
-		if (Input.GetKey(KeyCode.JoystickButton1) || Input.GetKey(KeyCode.E)) {
+		if (Input.GetKey(KeyCode.JoystickButton1) || Input.GetKey(KeyCode.E) || XCI.GetButton (XboxButton.B)) {
 
 			/*if (spotLight.GetComponent<FlashLightScript> ().isAvailable && !movementAllowed) {
 				audio.clip = Voice2;
@@ -166,6 +175,7 @@ public class PlayerMovement : MonoBehaviour {
 			}*/
 
 			if (isMobile) {
+				Debug.Log ("Select mobile");
 				GameObject.FindGameObjectWithTag ("Mobile").SetActive (false);
 				isMobile = false;
 				gameController.GetComponent<GameController> ().disableHelper ();
@@ -266,6 +276,7 @@ public class PlayerMovement : MonoBehaviour {
 
 		if (col.gameObject.tag == "Mobile") {
 			isMobile = true;
+			Debug.Log ("mobile");
 		}
 
 		if (col.gameObject.tag == "Key") {

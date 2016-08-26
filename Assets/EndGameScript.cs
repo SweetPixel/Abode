@@ -25,25 +25,31 @@ public class EndGameScript : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		float input = Input.GetAxis ("Horizontal");
-//		if (input == 0) {
-//			selected = null;
+//		if (XCI.GetButton(XboxButton.B)) {
+//			Debug.Log ("button");
 //		}
 		if (input > .1f) {
-			
+			Debug.Log ("Right");
 			selected = "Right";
 		} if (input < -.1f) {
-			
+			Debug.Log ("Left");
 			selected = "Left";
 		}
 	}
 
 	void Update () {
+//		if (XCI.GetButton(XboxButton.B)) {
+//			Debug.Log ("button");
+//			Debug.Log (check);
+//			Debug.Log (selected);
+//		}
 		if (selected == "Right" && XCI.GetButton(XboxButton.B) && check == false ) {
 			check = true;
 			ButtonClick button = gameController.GetComponent<ButtonClick> ();
 			button.QuitGame ();
 		} if (selected == "Left" && XCI.GetButton (XboxButton.B) && check == false) {
 			check = true;
+			//Debug.Log ("Restarting");
 			ButtonClick button = gameController.GetComponent<ButtonClick> ();
 			button.restartLevel ();
 		}
