@@ -10,6 +10,7 @@ public class TimerScript : MonoBehaviour {
 	public GameObject hint;
 	public GameObject skipButton;
 	float audioVolumn = 0.5f;
+	private bool check = true;
 
 	private bool isSkipped = false;
 
@@ -38,8 +39,13 @@ public class TimerScript : MonoBehaviour {
 			}
 		}
 		if (duration < 0) {
-			//Application.LoadLevelAsync ("Gameplay");
-			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
+			if (check) {
+				check = false;
+				PlayerPrefs.SetInt ("playCount", 1);
+				//Application.LoadLevelAsync ("Gameplay");
+				//Debug.Log (duration);
+				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
+			}
 		}
 
 
@@ -58,10 +64,11 @@ public class TimerScript : MonoBehaviour {
 			poem.SetActive (false);
 			title.SetActive (true);
 		}
-		if (duration < 0) {
-			PlayerPrefs.SetInt ("playCount", 1);
-			//Application.LoadLevelAsync ("Gameplay");
-			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
-		}
+//		if (duration < 0) {
+//			
+//			//Application.LoadLevelAsync ("Gameplay");
+//			Debug.Log (duration);
+//			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
+//		}
 	}
 }
