@@ -4,6 +4,12 @@ using System.Collections;
 using UnityEngine.UI;
 using XboxCtrlrInput;
 
+public enum PlayerOn
+{
+    ISIDE,
+    OUTSIDE
+};
+
 public class PlayerMovement : MonoBehaviour {
 
 	public float walkSpeed = 5f;
@@ -33,6 +39,8 @@ public class PlayerMovement : MonoBehaviour {
 	public bool hasKey = false;
     private bool isPoemPlayed = false;
 	public AudioClip clockRoomDialogue;
+
+    public PlayerOn playerOn = PlayerOn.ISIDE;
 
 	Vector3 forward;
 	Vector3 right;
@@ -77,7 +85,6 @@ public class PlayerMovement : MonoBehaviour {
 		float rotatePostY = Input.GetAxis ("Vertical");
 
 		Vector3 direction = new Vector3(rotatePosX, rotatePostY, 0f);
-
 		/*if (Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.W)) {
 			transform.position += transform.forward * Time.deltaTime * walkSpeed;
 		}
@@ -220,6 +227,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		GetComponent<AudioSource>().clip = keySound;
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds (GetComponent<AudioSource>().clip.length + 0.5f);
 		GetComponent<AudioSource>().clip = GhostWoman;
 		GetComponent<AudioSource>().Play ();
@@ -359,15 +367,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             walkSpeed = 0;
         }
-        //if (col.gameObject.tag == "rightDoorCollider")
-        //{
-        //    OpenDoorToLeft(col);
-        //}
-        //if (col.gameObject.tag == "leftDoorCollider")
-        //{
-        //    OpenDoorToRight(col);
-        //}
-		//gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+        
 	}
 
     void OnCollisionExit(Collision coll)
