@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	public float walkSpeed = 5f;
 	public float rotationSpeed = 5f;
+	public float mouseFollow = 45f;
 
 	//Lights
 	public GameObject flashLight;
@@ -72,6 +73,8 @@ public class PlayerMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () 
     {
+
+
 		float rotatePosX = Input.GetAxis ("Horizontal");
 
 		float rotatePostY = Input.GetAxis ("Vertical");
@@ -128,7 +131,7 @@ public class PlayerMovement : MonoBehaviour {
 				if (prePos != currnetPos) {
 					prePos = currnetPos;
 					Cursor.visible = true;
-					transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, walkSpeed * Time.deltaTime);
+					transform.rotation = Quaternion.Slerp (transform.rotation, targetRotation, mouseFollow * Time.deltaTime);
 				}
 			}
 
@@ -143,12 +146,31 @@ public class PlayerMovement : MonoBehaviour {
 				if (isStart) {
 					isStart = false;
 				}
-				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
-				if ((rotation.x != 0.0 || rotation.y != 0.0 || rotation.z != 0.0)) {
-					Cursor.visible = false;
-					transform.rotation = rotation;
-				}
+
+				// for keyboard
+				if (Input.GetKey(KeyCode.W)){
 					transform.position += transform.forward * Time.deltaTime * walkSpeed;
+				}
+				else if (Input.GetKey(KeyCode.A)) {
+					transform.position -= transform.right * Time.deltaTime * walkSpeed;
+				}
+				else if (Input.GetKey(KeyCode.S)){
+					transform.position -= transform.forward * Time.deltaTime * walkSpeed;
+				}
+				else if (Input.GetKey(KeyCode.D)) {
+					transform.position += transform.right * Time.deltaTime * walkSpeed;
+				}
+				// for joystick
+				else if ( XCI.GetButton (XboxButton.A)){
+					Debug.Log ("ELSE BUT Y"+ XCI.GetButton(XboxButton.B));
+					Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
+					if ((rotation.x != 0.0 || rotation.y != 0.0 || rotation.z != 0.0)) {
+						Debug.Log ("i am in if ");
+						Cursor.visible = false;
+						transform.rotation = rotation;
+					}
+					transform.position += transform.forward * Time.deltaTime * walkSpeed;
+				}
 					gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
 
 				} else {
