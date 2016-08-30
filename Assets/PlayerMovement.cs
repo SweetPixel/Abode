@@ -4,12 +4,6 @@ using System.Collections;
 using UnityEngine.UI;
 using XboxCtrlrInput;
 
-public enum PlayerOn
-{
-    ISIDE,
-    OUTSIDE
-};
-
 public class PlayerMovement : MonoBehaviour {
 
 	public float walkSpeed = 5f;
@@ -39,8 +33,6 @@ public class PlayerMovement : MonoBehaviour {
 	public bool hasKey = false;
     private bool isPoemPlayed = false;
 	public AudioClip clockRoomDialogue;
-
-    public PlayerOn playerOn = PlayerOn.ISIDE;
 
 	Vector3 forward;
 	Vector3 right;
