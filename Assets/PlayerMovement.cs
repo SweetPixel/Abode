@@ -207,6 +207,7 @@ public class PlayerMovement : MonoBehaviour {
         gameController.GetComponent<GameController>().LoadSubtitle(audio.clip);
 		yield return new WaitForSeconds (audio.clip.length);
 		blinkingMobile.GetComponent<AudioSource> ().enabled = true;
+        Debug.Log("blinking mobile");
 	}
 
 	public void supriseSound()
