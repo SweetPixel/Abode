@@ -151,17 +151,17 @@ public class PlayerMovement : MonoBehaviour {
 				if (Input.GetKey(KeyCode.W)){
 					transform.position += transform.forward * Time.deltaTime * walkSpeed;
 				}
-				else if (Input.GetKey(KeyCode.A)) {
+				if (Input.GetKey(KeyCode.A)) {
 					transform.position -= transform.right * Time.deltaTime * walkSpeed;
 				}
-				else if (Input.GetKey(KeyCode.S)){
+				if (Input.GetKey(KeyCode.S)){
 					transform.position -= transform.forward * Time.deltaTime * walkSpeed;
 				}
-				else if (Input.GetKey(KeyCode.D)) {
+				if (Input.GetKey(KeyCode.D)) {
 					transform.position += transform.right * Time.deltaTime * walkSpeed;
 				}
 				// for joystick
-				else if ( XCI.GetButton (XboxButton.A)){
+				if ( XCI.GetButton (XboxButton.A)){
 					Debug.Log ("ELSE BUT Y"+ XCI.GetButton(XboxButton.B));
 					Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
 					if ((rotation.x != 0.0 || rotation.y != 0.0 || rotation.z != 0.0)) {
@@ -382,9 +382,9 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
-        if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors" || col.gameObject.tag == "Furniture")
+        if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Furniture")
         {
-            walkSpeed = 0;
+            walkSpeed = 1;
         }
         //if (col.gameObject.tag == "rightDoorCollider")
         //{
