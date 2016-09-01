@@ -53,9 +53,9 @@ public class PlayerMovement : MonoBehaviour {
 	public XboxController playerNumber = XboxController.First;
 
     //Variable for TorchGrounds
-    public Light playerTorch;
-    public LayerMask roomsMask;
-    public LayerMask lobeyMask;
+    //public Light playerTorch;
+    //public LayerMask roomsMask;
+    //public LayerMask lobeyMask;
 
 
 	// Use this for initialization
@@ -343,19 +343,19 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
-    void OnTriggerEnter(Collider coll)
-    {
-        if (coll.gameObject.tag == "RoomGround")
-        {
-            playerTorch.cullingMask = roomsMask;
-            Debug.Log("Room");
-        }
-        else if (coll.gameObject.tag == "LobeyGround")
-        {
-            playerTorch.cullingMask = lobeyMask;
-            Debug.Log("Lobey");
-        }
-    }
+    //void OnTriggerEnter(Collider coll)
+    //{
+    //    if (coll.gameObject.tag == "RoomGround")
+    //    {
+    //        playerTorch.cullingMask = roomsMask;
+    //        Debug.Log("Room");
+    //    }
+    //    else if (coll.gameObject.tag == "LobeyGround")
+    //    {
+    //        playerTorch.cullingMask = lobeyMask;
+    //        Debug.Log("Lobey");
+    //    }
+    //}
 
 	void OnTriggerExit(Collider col)
 	{
