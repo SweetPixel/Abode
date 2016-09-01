@@ -284,16 +284,7 @@ public class PlayerMovement : MonoBehaviour {
 			isKey = true;
 			gameController.GetComponent<GameController> ().enableHelper ();
 		}
-        if (col.gameObject.tag == "RoomGround")
-        {
-            playerTorch.cullingMask = roomsMask;
-            Debug.Log("Room");
-        }
-        else if (col.gameObject.tag == "LobeyGround")
-        {
-            playerTorch.cullingMask = lobeyMask;
-            Debug.Log("Lobey");
-        }
+        
 
         //if (col.gameObject.tag == "rightDoorCollider")
         //{
@@ -354,7 +345,16 @@ public class PlayerMovement : MonoBehaviour {
 
     void OnTriggerEnter(Collider coll)
     {
-        
+        if (coll.gameObject.tag == "RoomGround")
+        {
+            playerTorch.cullingMask = roomsMask;
+            Debug.Log("Room");
+        }
+        else if (coll.gameObject.tag == "LobeyGround")
+        {
+            playerTorch.cullingMask = lobeyMask;
+            Debug.Log("Lobey");
+        }
     }
 
 	void OnTriggerExit(Collider col)
