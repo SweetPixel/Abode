@@ -52,6 +52,12 @@ public class PlayerMovement : MonoBehaviour {
 
 	public XboxController playerNumber = XboxController.First;
 
+    //Variable for TorchGrounds
+    public Light playerTorch;
+    public LayerMask roomsMask;
+    public LayerMask lobeyMask;
+
+
 	// Use this for initialization
 	void Start () {
 		GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
@@ -207,7 +213,6 @@ public class PlayerMovement : MonoBehaviour {
         gameController.GetComponent<GameController>().LoadSubtitle(audio.clip);
 		yield return new WaitForSeconds (audio.clip.length);
 		blinkingMobile.GetComponent<AudioSource> ().enabled = true;
-        Debug.Log("blinking mobile");
 	}
 
 	public void supriseSound()
@@ -279,6 +284,16 @@ public class PlayerMovement : MonoBehaviour {
 			isKey = true;
 			gameController.GetComponent<GameController> ().enableHelper ();
 		}
+        if (col.gameObject.tag == "RoomGround")
+        {
+            playerTorch.cullingMask = roomsMask;
+            Debug.Log("Room");
+        }
+        else if (col.gameObject.tag == "LobeyGround")
+        {
+            playerTorch.cullingMask = lobeyMask;
+            Debug.Log("Lobey");
+        }
 
         //if (col.gameObject.tag == "rightDoorCollider")
         //{
@@ -336,6 +351,11 @@ public class PlayerMovement : MonoBehaviour {
         //}
 
 	}
+
+    void OnTriggerEnter(Collider coll)
+    {
+        
+    }
 
 	void OnTriggerExit(Collider col)
 	{

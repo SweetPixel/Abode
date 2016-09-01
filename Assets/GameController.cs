@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
     }
 	void Start () {
 		helper = GameObject.Find ("HelpingText");
-		helper.SetActive (false);
+		//helper.SetActive (false);
 	}
 	
 	// Update is called once per frame
