@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class DoorOpen : MonoBehaviour
 {
@@ -41,12 +42,21 @@ public class DoorOpen : MonoBehaviour
     {
         if (coll.tag == "leftDoorCollider" || coll.tag == "leftDoorCollider")
         {
-            if (doorCurrentState == DoorState.OPEN)
+            try
             {
-                openDoorRef.gameObject.GetComponent<OpenDoorScript>().enableDoorClose = true;
-                openDoorRef = null;
-                doorCurrentState = DoorState.CLOSE;
-                Debug.Log("close Door");
+                if (doorCurrentState == DoorState.OPEN)
+                {
+
+                    openDoorRef.gameObject.GetComponent<OpenDoorScript>().enableDoorClose = true;
+                    openDoorRef = null;
+                    doorCurrentState = DoorState.CLOSE;
+                    Debug.Log("close Door");
+
+                }
+            }
+            catch (Exception e)
+            {
+
             }
         }
     }

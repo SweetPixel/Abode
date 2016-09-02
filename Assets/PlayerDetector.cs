@@ -8,6 +8,7 @@ public class PlayerDetector : MonoBehaviour {
 	public bool spotted = true;
 	public float speed = 2.5f;
 	public Transform player;
+    private bool isFisrtTime = true;
 
 	private float duration = 10f;
 	private bool timerStart = false;
@@ -45,8 +46,9 @@ public class PlayerDetector : MonoBehaviour {
 
 		if (isRestart) {
 			restartTimer -= Time.deltaTime;
-			if (restartTimer < 0) {
+			if (restartTimer < 0 && isFisrtTime) {
 				Application.LoadLevelAsync ("Gameplay");
+                isFisrtTime = false;
 			}
 		}
 

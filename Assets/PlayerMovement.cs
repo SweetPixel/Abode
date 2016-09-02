@@ -15,7 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 	public GameObject spotLight;
 	public GameObject key;
 
-	private bool isMobile = false;
+	public bool isMobile = false;
 	public bool movementAllowed = false;
 
 	private AudioSource audio;
@@ -24,13 +24,14 @@ public class PlayerMovement : MonoBehaviour {
 	public AudioClip maleVoice;
 	public GameObject blinkingMobile;
 	public AudioClip keySound, GhostWoman;
+    public bool hasMobileAttende=false;
 
 	public AudioClip[] dialogues;
 	private int totalLength;
 	public bool isOpen = false;
 	private bool isKey = false;
 	public bool hasKey = false;
-
+    private bool isPoemPlayed = false;
 	public AudioClip clockRoomDialogue;
 
 	Vector3 forward;
@@ -50,6 +51,12 @@ public class PlayerMovement : MonoBehaviour {
 	public Sprite[] objectivesComplete;
 
 	public XboxController playerNumber = XboxController.First;
+
+    //Variable for TorchGrounds
+    //public Light playerTorch;
+    //public LayerMask roomsMask;
+    //public LayerMask lobeyMask;
+
 
 	// Use this for initialization
 	void Start () {
@@ -76,7 +83,6 @@ public class PlayerMovement : MonoBehaviour {
 		float rotatePostY = Input.GetAxis ("Vertical");
 
 		Vector3 direction = new Vector3(rotatePosX, rotatePostY, 0f);
-
 		/*if (Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.W)) {
 			transform.position += transform.forward * Time.deltaTime * walkSpeed;
 		}
@@ -140,6 +146,7 @@ public class PlayerMovement : MonoBehaviour {
 //				transform.rotation = rotation;
 				transform.position += transform.forward * Time.deltaTime * walkSpeed;
 				gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
+                //Debug.Log("hello");
 
 			} else {
 				gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
@@ -168,17 +175,21 @@ public class PlayerMovement : MonoBehaviour {
 			if (isMobile) {
 				GameObject.FindGameObjectWithTag ("Mobile").SetActive (false);
 				isMobile = false;
+                hasMobileAttende = true;
 				gameController.GetComponent<GameController> ().disableHelper ();
 				StartCoroutine (PlayAllDialogues());
 				objectives [0].GetComponent<Image> ().sprite = objectivesComplete [0];
-			}
-
-			if (isKey) {
-				StartCoroutine (keySounds ());
-				hasKey = true;
-				objectives [2].GetComponent<Image> ().sprite = objectivesComplete [2];
-				key.SetActive (false);
-			}
+                Debug.Log("Mobile Attended");
+            }
+            else if (isKey && isPoemPlayed==false)
+            {
+                isPoemPlayed = true;
+                StartCoroutine(keySounds());
+                hasKey = true;
+                objectives[2].GetComponent<Image>().sprite = objectivesComplete[2];
+                key.SetActive(false);
+                Debug.Log("Got KEy");
+            }
 
 		}
 
@@ -214,6 +225,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
 		GetComponent<AudioSource>().clip = keySound;
 		GetComponent<AudioSource>().Play ();
+        gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
 		yield return new WaitForSeconds (GetComponent<AudioSource>().clip.length + 0.5f);
 		GetComponent<AudioSource>().clip = GhostWoman;
 		GetComponent<AudioSource>().Play ();
@@ -272,6 +284,7 @@ public class PlayerMovement : MonoBehaviour {
 			isKey = true;
 			gameController.GetComponent<GameController> ().enableHelper ();
 		}
+        
 
         //if (col.gameObject.tag == "rightDoorCollider")
         //{
@@ -330,6 +343,20 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
+    //void OnTriggerEnter(Collider coll)
+    //{
+    //    if (coll.gameObject.tag == "RoomGround")
+    //    {
+    //        playerTorch.cullingMask = roomsMask;
+    //        Debug.Log("Room");
+    //    }
+    //    else if (coll.gameObject.tag == "LobeyGround")
+    //    {
+    //        playerTorch.cullingMask = lobeyMask;
+    //        Debug.Log("Lobey");
+    //    }
+    //}
+
 	void OnTriggerExit(Collider col)
 	{
 		if (col.gameObject.tag == "Mobile") {
@@ -353,15 +380,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             walkSpeed = 0;
         }
-        //if (col.gameObject.tag == "rightDoorCollider")
-        //{
-        //    OpenDoorToLeft(col);
-        //}
-        //if (col.gameObject.tag == "leftDoorCollider")
-        //{
-        //    OpenDoorToRight(col);
-        //}
-		//gameObject.GetComponent<Rigidbody> ().velocity = Vector3.zero;
+        
 	}
 
     void OnCollisionExit(Collision coll)
