@@ -24,12 +24,12 @@ public class FlashLightDimer : MonoBehaviour {
         if (Physics.Linecast(startPos.position, targetPos.position, out hit))
         {
             
-            if (hit.collider.tag == "Walls")
+            if (hit.collider.tag == "Walls"||hit.collider.tag=="Doors")
             {
                 tempRange=lightStrenght * hit.distance;
                 if (tempRange < 15)
                 {
-                    if (tempRange > 2.5)
+                    if (tempRange > 5)
                     {
                             playerFlashLight.range = tempRange - 2;
                     }
@@ -38,16 +38,16 @@ public class FlashLightDimer : MonoBehaviour {
                         playerFlashLight.range = tempRange;
                     }
                     tmpResult = 10 - hit.distance;
-                    if (playerFlashLight.intensity < tmpResult / 3)
+                    if (playerFlashLight.intensity < tmpResult / 2.5)
                     {
-                        if (tmpResult / 1.7 > 2)
+                        if (tmpResult / 1.7 > 1.5)
                         {
-                            playerFlashLight.intensity = tmpResult / 1.7f;
+                            playerFlashLight.intensity = tmpResult / 1.6f;
                             Debug.Log("done");
                         }
                         else
                         {
-                            playerFlashLight.intensity = 2;
+                            playerFlashLight.intensity = 1.5f;
                         }
                     }
                 }
@@ -56,7 +56,7 @@ public class FlashLightDimer : MonoBehaviour {
             {
 
                 playerFlashLight.range = Mathf.Lerp(playerFlashLight.range, 15, 0.5f);
-                playerFlashLight.intensity = Mathf.Lerp(playerFlashLight.intensity, 2f, 0.3f);
+                playerFlashLight.intensity = Mathf.Lerp(playerFlashLight.intensity, 1.5f, 0.3f);
             }
         }
         else
@@ -69,14 +69,14 @@ public class FlashLightDimer : MonoBehaviour {
         {
             if (hit.collider.tag == "Walls")
             {
-                playerFlashLight.spotAngle = 65;
+                playerFlashLight.spotAngle = 70;
             }
         }
         else if (Physics.Linecast(startPos.position, targetLeft.position, out hit))
         {
             if (hit.collider.tag == "Walls")
             {
-                playerFlashLight.spotAngle = 65;
+                playerFlashLight.spotAngle = 70;
             }
         }
         else
