@@ -1,10 +1,23 @@
 fileFormatVersion: 2
 guid: 0f9c959e2c552974aa9a2041b5c0da3a
-timeCreated: 1471004620
+timeCreated: 1472645507
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - flashLight: {instanceID: 0}
+  - flashLight_light: {instanceID: 0}
+  - spotLight: {instanceID: 0}
+  - key: {instanceID: 0}
+  - Voice2: {instanceID: 0}
+  - girlSound: {instanceID: 0}
+  - maleVoice: {instanceID: 0}
+  - blinkingMobile: {instanceID: 0}
+  - keySound: {instanceID: 0}
+  - GhostWoman: {instanceID: 0}
+  - clockRoomDialogue: {instanceID: 0}
+  - controls: {instanceID: 0}
+  - afterKey: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

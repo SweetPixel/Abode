@@ -52,6 +52,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	public XboxController playerNumber = XboxController.First;
 	private Vector3 prePos = Vector3.zero;
+	public GameObject[] afterKey;
+	public GameObject[] afterKeyOff;
+	public GameObject[] lamp;
+	private bool check = true;
 
 	// Use this for initialization
 	void Start () {
@@ -67,7 +71,16 @@ public class PlayerMovement : MonoBehaviour {
 		right = Quaternion.Euler(new Vector3(0,90,0)) * forward;
 
 		gameController = GameObject.Find ("GameController");
+		afterKey = GameObject.FindGameObjectsWithTag("AfterKeyOn");
+		afterKeyOff = GameObject.FindGameObjectsWithTag("AfterKeyOff");
+		lamp = GameObject.FindGameObjectsWithTag("LAMP");
 
+		Debug.Log (afterKey +"+"+ afterKeyOff +"+"+ lamp);
+
+		foreach (GameObject go in afterKey){
+			Debug.Log ("in game obj");
+			go.SetActive (false);
+		}
 	}
 	
 	// Update is called once per frame
@@ -103,7 +116,7 @@ public class PlayerMovement : MonoBehaviour {
 			/*if (rotatePosX > 0) {
 				GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
 			}*/
-			//this.transform.Rotate(0, rotatePosX * rotationSpeed, 0);
+			//his.transform.Rotate(0, rotatePosX * rotationSpeed, 0);
 
 			// Generate a plane that intersects the transform's position with an upwards normal.
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
@@ -210,10 +223,45 @@ public class PlayerMovement : MonoBehaviour {
 				hasKey = true;
 				objectives [2].GetComponent<Image> ().sprite = objectivesComplete [2];
 				key.SetActive (false);
+
+				foreach (GameObject go in lamp){
+					Debug.Log ("in game lam off");
+					go.SetActive (false);
+				}
+
+				if (check) {
+
+				foreach (GameObject go in afterKeyOff){
+					Debug.Log ("in game off");
+					go.SetActive (false);
+				}
+
+				foreach (GameObject go in afterKey){
+					Debug.Log ("in game on");
+					go.SetActive (true);
+				}
+				
+				
+
+				foreach (GameObject go in lamp){
+					StartCoroutine(Example());
+					Debug.Log ("in game lmap on");
+					go.SetActive (true);
+				}
+					check = false;
+
+				}
+
 			}
 
 		}
 
+	}
+
+	IEnumerator Example() {
+		print(Time.time);
+		yield return new WaitForSeconds(1f);
+		print(Time.time);
 	}
 
 	IEnumerator PlaySounds()
@@ -384,7 +432,7 @@ public class PlayerMovement : MonoBehaviour {
 	{
         if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Furniture")
         {
-            walkSpeed = 1;
+            walkSpeed = 0.01f;
         }
         //if (col.gameObject.tag == "rightDoorCollider")
         //{

@@ -15,6 +15,8 @@ ModelImporter:
     3300002: Cork
     4300000: Bottle
     4300002: Cork
+    6400000: //RootNode
+    6400002: Cork
   materials:
     importMaterials: 1
     materialName: 0
@@ -22,7 +24,7 @@ ModelImporter:
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
-    resampleRotations: 1
+    resampleCurves: 1
     optimizeGameObjects: 0
     motionNodeName: 
     animationImportErrors: 
