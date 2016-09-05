@@ -5,8 +5,6 @@ using UnityEngine.UI;
 using XboxCtrlrInput;
 
 public class PlayerMovement : MonoBehaviour {
-
-	public float walkSpeed = 5f;
 	public float rotationSpeed = 5f;
 
 	//Lights
@@ -144,7 +142,6 @@ public class PlayerMovement : MonoBehaviour {
 				}
 //				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
 //				transform.rotation = rotation;
-				transform.position += transform.forward * Time.deltaTime * walkSpeed;
 				gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
                 //Debug.Log("hello");
 
@@ -376,17 +373,17 @@ public class PlayerMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision col)
 	{
+        
         if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors" || col.gameObject.tag == "Furniture")
         {
-            walkSpeed = 0;
+            Debug.Log(col.gameObject.tag);
         }
         
 	}
 
     void OnCollisionExit(Collision coll)
     {
-        //Debug.Log(coll.gameObject.tag);
-        walkSpeed = 5;
+        
     }
 
     public void OpenDoorToRight(Collider coll)
