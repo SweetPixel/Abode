@@ -371,21 +371,6 @@ public class PlayerMovement : MonoBehaviour {
 
 	}
 
-	void OnCollisionEnter(Collision col)
-	{
-        
-        if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors" || col.gameObject.tag == "Furniture")
-        {
-            Debug.Log(col.gameObject.tag);
-        }
-        
-	}
-
-    void OnCollisionExit(Collision coll)
-    {
-        
-    }
-
     public void OpenDoorToRight(Collider coll)
     {
         coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<Animator>().SetBool("isRight", true);
