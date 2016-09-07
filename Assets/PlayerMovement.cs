@@ -4,6 +4,13 @@ using System.Collections;
 using UnityEngine.UI;
 using XboxCtrlrInput;
 
+
+public enum PlayerDirection
+{
+    FORWARD,
+    BACKWORD
+};
+
 public class PlayerMovement : MonoBehaviour {
 	public float rotationSpeed = 5f;
 
@@ -47,8 +54,10 @@ public class PlayerMovement : MonoBehaviour {
 
 	public GameObject[] objectives;
 	public Sprite[] objectivesComplete;
-
+    public static PlayerDirection playerDirection;
 	public XboxController playerNumber = XboxController.First;
+
+    private Quaternion finalRotation;
 
     //Variable for TorchGrounds
     //public Light playerTorch;
@@ -68,7 +77,7 @@ public class PlayerMovement : MonoBehaviour {
 		forward. y = 0;
 		forward = Vector3.Normalize(forward);
 		right = Quaternion.Euler(new Vector3(0,90,0)) * forward;
-
+        playerDirection = PlayerDirection.FORWARD;
 		gameController = GameObject.Find ("GameController");
 
 	}
@@ -109,7 +118,6 @@ public class PlayerMovement : MonoBehaviour {
 			Plane playerPlane = new Plane(Vector3.up, transform.position);
 			// Generate a ray from the cursor position
 			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-
 			// Determine the point where the cursor ray intersects the plane.
 			// This will be the point that the object must look towards to be looking at the mouse.
 			// Raycasting to a Plane object only gives us a distance, so we'll have to take the distance,
@@ -123,10 +131,26 @@ public class PlayerMovement : MonoBehaviour {
 				Vector3 targetPoint = ray.GetPoint(hitdist);
 
 				// Determine the target rotation.  This is the rotation if the transform looks at the target point.
-				Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
+                Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
 				// Smoothly rotate towards the target point.
-				transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                //Debug.Log(targetRotation);
+
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                if (transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270)
+                {
+                    if (playerDirection != PlayerDirection.BACKWORD)
+                    {
+                        playerDirection = PlayerDirection.BACKWORD;
+                    }
+                }
+                else
+                {
+                    if (playerDirection != PlayerDirection.FORWARD)
+                    {
+                        playerDirection = PlayerDirection.FORWARD;
+                    }
+                }
 			}
 
 			if (!isStart) {
@@ -235,7 +259,7 @@ public class PlayerMovement : MonoBehaviour {
 		GetComponent<AudioSource>().clip = dialogues[0];
 		GetComponent<AudioSource>().Play ();
         gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-		Debug.Log (GetComponent<AudioSource>().clip);
+		//Debug.Log (GetComponent<AudioSource>().clip);
 		//Debug.Log (GetComponent<AudioSource>().clip);
 
 		yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);

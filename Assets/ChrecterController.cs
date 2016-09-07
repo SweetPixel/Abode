@@ -11,7 +11,14 @@ public class ChrecterController : MonoBehaviour {
     {
         CharacterController controller = GetComponent<CharacterController>();
         if (controller.isGrounded) {
-            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            if (PlayerMovement.playerDirection == PlayerDirection.FORWARD)
+            {
+                moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            }
+            else
+            {
+                moveDirection = new Vector3(-(Input.GetAxis("Horizontal")), 0, Input.GetAxis("Vertical"));
+            }
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
         }
