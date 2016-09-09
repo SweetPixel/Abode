@@ -50,7 +50,6 @@ public class DoorOpen : MonoBehaviour
                     openDoorRef.gameObject.GetComponent<OpenDoorScript>().enableDoorClose = true;
                     openDoorRef = null;
                     doorCurrentState = DoorState.CLOSE;
-                    Debug.Log("close Door");
 
                 }
             }

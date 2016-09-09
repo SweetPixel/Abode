@@ -24,6 +24,6 @@ public class ChrecterController : MonoBehaviour {
         }
         moveDirection.y -= gravity * Time.deltaTime;
         controller.Move(moveDirection * Time.deltaTime);
-        Debug.Log("controller");
+        //Debug.Log("controller");
     }
 }

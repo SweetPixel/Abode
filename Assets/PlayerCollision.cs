@@ -13,7 +13,7 @@ public class PlayerCollision : MonoBehaviour
         if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors")
         {
             light.cullingMask = mask1;
-            Debug.Log("Walls");
+            //Debug.Log("Walls");
         }
 
     }
@@ -21,7 +21,7 @@ public class PlayerCollision : MonoBehaviour
     void OnCollisionExit(Collision coll)
     {
         light.cullingMask = mask2;
-        Debug.Log("Walls exit");
+        //Debug.Log("Walls exit");
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit)
