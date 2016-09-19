@@ -23,7 +23,6 @@ public class GhostNavigation : MonoBehaviour
                 if (FollwingDuration>0)
                 {
                     FollwingDuration -= Time.deltaTime;
-                    Debug.Log("duration: "+FollwingDuration);
                 }
                 else
                 {
