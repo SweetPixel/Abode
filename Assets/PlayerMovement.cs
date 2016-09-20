@@ -5,11 +5,11 @@ using UnityEngine.UI;
 using XboxCtrlrInput;
 
 
-public enum PlayerDirection
-{
-    FORWARD,
-    BACKWORD
-};
+//public enum PlayerDirection
+//{
+//    FORWARD,
+//    BACKWORD
+//};
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -58,7 +58,7 @@ public class PlayerMovement : MonoBehaviour
 
     public GameObject[] objectives;
     public Sprite[] objectivesComplete;
-    public static PlayerDirection playerDirection;
+    //public static PlayerDirection playerDirection;
     public XboxController playerNumber = XboxController.First;
 
     private Quaternion finalRotation;
@@ -83,7 +83,7 @@ public class PlayerMovement : MonoBehaviour
         forward.y = 0;
         forward = Vector3.Normalize(forward);
         right = Quaternion.Euler(new Vector3(0, 90, 0)) * forward;
-        playerDirection = PlayerDirection.FORWARD;
+        //playerDirection = PlayerDirection.FORWARD;
         gameController = GameObject.Find("GameController");
 
     }
@@ -143,21 +143,21 @@ public class PlayerMovement : MonoBehaviour
                 // Smoothly rotate towards the target point.
                 //Debug.Log(targetRotation);
 
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-                if (transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270)
-                {
-                    if (playerDirection != PlayerDirection.BACKWORD)
-                    {
-                        playerDirection = PlayerDirection.BACKWORD;
-                    }
-                }
-                else
-                {
-                    if (playerDirection != PlayerDirection.FORWARD)
-                    {
-                        playerDirection = PlayerDirection.FORWARD;
-                    }
-                }
+                //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+                //if (transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270)
+                //{
+                //    if (playerDirection != PlayerDirection.BACKWORD)
+                //    {
+                //        playerDirection = PlayerDirection.BACKWORD;
+                //    }
+                //}
+                //else
+                //{
+                //    if (playerDirection != PlayerDirection.FORWARD)
+                //    {
+                //        playerDirection = PlayerDirection.FORWARD;
+                //    }
+                //}
             }
 
             if (!isStart)
@@ -177,13 +177,13 @@ public class PlayerMovement : MonoBehaviour
                 }
                 //				Quaternion rotation = Quaternion.LookRotation (new Vector3 (rotatePosX, 0, rotatePostY));
                 //				transform.rotation = rotation;
-                gameObject.GetComponent<Animator>().SetBool("isMoving", true);
+                //gameObject.GetComponent<Animator>().SetBool("isMoving", true);
                 //Debug.Log("hello");
 
             }
             else
             {
-                gameObject.GetComponent<Animator>().SetBool("isMoving", false);
+                //gameObject.GetComponent<Animator>().SetBool("isMoving", false);
             }
 
         }
