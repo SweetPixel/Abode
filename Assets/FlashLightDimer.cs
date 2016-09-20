@@ -43,7 +43,6 @@ public class FlashLightDimer : MonoBehaviour {
                         if (tmpResult / 1.7 > 1.5)
                         {
                             playerFlashLight.intensity = tmpResult / 1.6f;
-                            Debug.Log("done");
                         }
                         else
                         {
