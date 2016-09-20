@@ -5,10 +5,10 @@ using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.Utility;
 
 public class ChrecterController : MonoBehaviour {
-    public float speed = 6.0F;
-    public float jumpSpeed = 8.0F;
-    public float gravity = 20.0F;
-    private Vector3 moveDirection = Vector3.zero;
+    //public float speed = 6.0F;
+    //public float jumpSpeed = 8.0F;
+    //public float gravity = 20.0F;
+    //private Vector3 moveDirection = Vector3.zero;
 
     //void Update()
     //{
@@ -48,6 +48,8 @@ public class ChrecterController : MonoBehaviour {
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
+        [SerializeField] private float m_minXRot;
+        [SerializeField] private float m_maxXRot;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -82,7 +84,7 @@ public class ChrecterController : MonoBehaviour {
         // Update is called once per frame
         private void Update()
         {
-            RotateView();
+            RotateView(); 
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -149,8 +151,11 @@ public class ChrecterController : MonoBehaviour {
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
 
             ProgressStepCycle(speed);
-            UpdateCameraPosition(speed);
-
+            if (m_Camera.transform.rotation.eulerAngles.x > m_minXRot && m_Camera.transform.rotation.eulerAngles.x < m_maxXRot)
+            {
+                UpdateCameraPosition(speed);
+                
+            }
             m_MouseLook.UpdateCursorLock();
         }
 
