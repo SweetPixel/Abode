@@ -20,45 +20,36 @@ public class DoorOpen : MonoBehaviour
 
     void Update()
     {
-        if (Physics.Linecast(origin.position, targetFront.position, out hit))
+        if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
         {
-            if (hit.collider.tag == "rightDoorCollider")
+            if (Physics.Linecast(origin.position, targetFront.position, out hit))
             {
-
-                gameObject.transform.parent.gameObject.GetComponent<PlayerMovement>().OpenDoorToRight(hit.collider);
-                openDoorRef = hit.collider;
-                doorCurrentState = DoorState.OPEN;
-            }
-            else if (hit.collider.tag == "leftDoorCollider")
-            {
-                gameObject.transform.parent.gameObject.GetComponent<PlayerMovement>().OpenDoorToLeft(hit.collider);
-                openDoorRef = hit.collider;
-                doorCurrentState = DoorState.OPEN;
-            }
-        }
-        Debug.DrawLine(origin.position, targetFront.position, Color.black);
-    }
-    void OnTriggerExit(Collider coll)
-    {
-        if (coll.tag == "leftDoorCollider" || coll.tag == "leftDoorCollider")
-        {
-            try
-            {
-                if (doorCurrentState == DoorState.OPEN)
+                if (hit.collider.tag == "DoorInsideCollider")
                 {
-
-                    openDoorRef.gameObject.GetComponent<OpenDoorScript>().enableDoorClose = true;
-                    openDoorRef = null;
-                    doorCurrentState = DoorState.CLOSE;
-
+                    hit.collider.transform.parent.transform.parent.GetComponent<DoorController>().OpenDoorOutside();
+                }
+                else if (hit.collider.tag == "DoorOutsideCollider")
+                {
+                    hit.collider.transform.transform.parent.parent.GetComponent<DoorController>().OpenDoorInside();
                 }
             }
-            catch (Exception e)
-            {
-
-            }
         }
+        //if (Physics.Linecast(origin.position, targetFront.position, out hit))
+        //{
+        //    if (hit.collider.tag == "rightDoorCollider")
+        //    {
+
+        //        gameObject.transform.parent.gameObject.GetComponent<PlayerMovement>().OpenDoorToRight(hit.collider);
+        //        openDoorRef = hit.collider;
+        //        doorCurrentState = DoorState.OPEN;
+        //    }
+        //    else if (hit.collider.tag == "leftDoorCollider")
+        //    {
+        //        gameObject.transform.parent.gameObject.GetComponent<PlayerMovement>().OpenDoorToLeft(hit.collider);
+        //        openDoorRef = hit.collider;
+        //        doorCurrentState = DoorState.OPEN;
+        //    }
+        //}
+        Debug.DrawLine(origin.position, targetFront.position, Color.black);
     }
-
-
 }

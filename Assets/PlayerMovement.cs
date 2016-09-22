@@ -307,37 +307,6 @@ public class PlayerMovement : MonoBehaviour
         LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
         yield return new WaitForSeconds(playerAudioSource.clip.length);
 
-        //GetComponent<AudioSource>().clip = dialogues[0];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        ////Debug.Log (GetComponent<AudioSource>().clip);
-        ////Debug.Log (GetComponent<AudioSource>().clip);
-
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[1];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[2];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[3];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[4];
-        //GetComponent<AudioSource>().Play ();
-        ////gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[5];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[6];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
         objectives[1].SetActive(true);
     }
 
@@ -388,14 +357,18 @@ public class PlayerMovement : MonoBehaviour
 
     public void OpenDoorToRight(Collider coll)
     {
-        coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<Animator>().SetBool("isRight", true);
-        coll.gameObject.GetComponent<OpenDoorScript>().isOpen = true;
+        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<Animator>().SetBool("isRight", true);
+        //coll.gameObject.GetComponent<OpenDoorScript>().isOpen = true;
+        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<DoorController>().doorOpeningDirection = DoorOpeningDirection.OPENINGINSIDE;
+        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<DoorController>().doorState = DoorState.OPEN;
     }
 
     public void OpenDoorToLeft(Collider coll)
     {
-        coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<Animator>().SetBool("isLeft", true);
-        coll.gameObject.GetComponent<OpenDoorScript>().isOpen = true;
+        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<Animator>().SetBool("isLeft", true);
+        //coll.gameObject.GetComponent<OpenDoorScript>().isOpen = true;
+        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<DoorController>().doorOpeningDirection = DoorOpeningDirection.OPENINGINSIDE;
+        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<DoorController>().doorState = DoorState.OPEN;
     }
 
 }
