@@ -5,12 +5,6 @@ using UnityEngine.UI;
 using XboxCtrlrInput;
 
 
-//public enum PlayerDirection
-//{
-//    FORWARD,
-//    BACKWORD
-//};
-
 public class PlayerMovement : MonoBehaviour
 {
     public float rotationSpeed = 5f;
@@ -111,8 +105,6 @@ public class PlayerMovement : MonoBehaviour
 
         currentLerpTime += Time.deltaTime;
 
-
-
         if (movementAllowed)
         {
 
@@ -140,24 +132,6 @@ public class PlayerMovement : MonoBehaviour
                 // Determine the target rotation.  This is the rotation if the transform looks at the target point.
                 Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
 
-                // Smoothly rotate towards the target point.
-                //Debug.Log(targetRotation);
-
-                //transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-                //if (transform.rotation.eulerAngles.y > 90 && transform.rotation.eulerAngles.y < 270)
-                //{
-                //    if (playerDirection != PlayerDirection.BACKWORD)
-                //    {
-                //        playerDirection = PlayerDirection.BACKWORD;
-                //    }
-                //}
-                //else
-                //{
-                //    if (playerDirection != PlayerDirection.FORWARD)
-                //    {
-                //        playerDirection = PlayerDirection.FORWARD;
-                //    }
-                //}
             }
 
             if (!isStart)
@@ -271,73 +245,91 @@ public class PlayerMovement : MonoBehaviour
 
 
     IEnumerator PlayAllDialogues()
-    {
-        playerAudioSource.clip = dialogues[0];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
+	{
+		playerAudioSource.clip = dialogues [0];
+		playerAudioSource.Play ();
+		LoadSubtitle.LoadSubtitle (playerAudioSource.clip);
+		yield return new WaitForSeconds (playerAudioSource.clip.length);
 
-        playerAudioSource.clip = dialogues[1];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
+		playerAudioSource.clip = dialogues [1];
+		playerAudioSource.Play ();
+		LoadSubtitle.LoadSubtitle (playerAudioSource.clip);
+		yield return new WaitForSeconds (playerAudioSource.clip.length);
 
-        playerAudioSource.clip = dialogues[2];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
+		playerAudioSource.clip = dialogues [2];
+		playerAudioSource.Play ();
+		LoadSubtitle.LoadSubtitle (playerAudioSource.clip);
+		yield return new WaitForSeconds (playerAudioSource.clip.length);
 
-        playerAudioSource.clip = dialogues[3];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
+		playerAudioSource.clip = dialogues [3];
+		playerAudioSource.Play ();
+		LoadSubtitle.LoadSubtitle (playerAudioSource.clip);
+		yield return new WaitForSeconds (playerAudioSource.clip.length);
 
-        playerAudioSource.clip = dialogues[4];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
+		playerAudioSource.clip = dialogues [4];
+		playerAudioSource.Play ();
+		LoadSubtitle.LoadSubtitle (playerAudioSource.clip);
+		yield return new WaitForSeconds (playerAudioSource.clip.length);
 
-        playerAudioSource.clip = dialogues[5];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
+		playerAudioSource.clip = dialogues [5];
+		playerAudioSource.Play ();
+		LoadSubtitle.LoadSubtitle (playerAudioSource.clip);
+		yield return new WaitForSeconds (playerAudioSource.clip.length);
 
-        playerAudioSource.clip = dialogues[6];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
+		playerAudioSource.clip = dialogues [6];
+		playerAudioSource.Play ();
+		LoadSubtitle.LoadSubtitle (playerAudioSource.clip);
+		yield return new WaitForSeconds (playerAudioSource.clip.length);
 
-        //GetComponent<AudioSource>().clip = dialogues[0];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        ////Debug.Log (GetComponent<AudioSource>().clip);
-        ////Debug.Log (GetComponent<AudioSource>().clip);
+		//GetComponent<AudioSource>().clip = dialogues[0];
+		//GetComponent<AudioSource>().Play ();
+		//gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
+		////Debug.Log (GetComponent<AudioSource>().clip);
+		////Debug.Log (GetComponent<AudioSource>().clip);
 
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[1];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[2];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[3];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[4];
-        //GetComponent<AudioSource>().Play ();
-        ////gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[5];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
-        //GetComponent<AudioSource>().clip = dialogues[6];
-        //GetComponent<AudioSource>().Play ();
-        //gameController.GetComponent<GameController>().LoadSubtitle(GetComponent<AudioSource>().clip);
-        //yield return new WaitForSeconds(GetComponent<AudioSource>().clip.length);
+	}
+
+	void OnTriggerStay(Collider col)
+	{
+		//Debug.Log (col.gameObject.tag);
+
+//		Debug.Log (col.gameObject.tag);
+
+
+		if (col.gameObject.tag == "Mobile") {
+			isMobile = true;
+			Debug.Log ("mobile");
+		}
+
+		if (col.gameObject.tag == "Key") {
+			isKey = true;
+			gameController.GetComponent<GameController> ().enableHelper ();
+		}
+
+       
+
+	}
+
+	void OnTriggerExit(Collider col)
+	{
+		if (col.gameObject.tag == "Mobile") {
+			isMobile = false;
+		}
+
+		if (col.gameObject.tag == "Key") {
+			isKey = false;
+			gameController.GetComponent<GameController> ().disableHelper ();
+		}
+
+		if (col.gameObject.tag == "rightDoorCollider" || col.gameObject.tag == "leftDoorCollider") {
+			gameController.GetComponent<GameController> ().disableHelper ();
+		}
+
+	}
+
+	void OnCollisionEnter(Collision col)
+	{
+        if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors" || col.gameObject.tag == "Furniture")
         objectives[1].SetActive(true);
     }
 
@@ -353,37 +345,6 @@ public class PlayerMovement : MonoBehaviour
             isKey = true;
             gameController.GetComponent<GameController>().enableHelper();
         }
-    }
-
-    void OnTriggerExit(Collider col)
-    {
-        if (col.gameObject.tag == "Mobile")
-        {
-            isMobile = false;
-        }
-
-        if (col.gameObject.tag == "Key")
-        {
-            isKey = false;
-            gameController.GetComponent<GameController>().disableHelper();
-        }
-
-        if (col.gameObject.tag == "rightDoorCollider" || col.gameObject.tag == "leftDoorCollider")
-        {
-            gameController.GetComponent<GameController>().disableHelper();
-        }
-
-        if (col.gameObject.tag == "Mobile")
-        {
-            isMobile = false;
-        }
-
-        if (col.gameObject.tag == "Key")
-        {
-            isKey = false;
-            gameController.GetComponent<GameController>().enableHelper();
-        }
-
     }
 
     public void OpenDoorToRight(Collider coll)
