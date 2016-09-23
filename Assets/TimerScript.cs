@@ -10,6 +10,10 @@ public class TimerScript : MonoBehaviour {
 	public GameObject hint;
 	public GameObject skipButton;
 	float audioVolumn = 0.5f;
+<<<<<<< HEAD
+=======
+	private bool check = true;
+>>>>>>> imrankhanswati-Abode-First-Person-View
     AsyncOperation asyncOpration;
 
 	private bool isSkipped = false;
@@ -42,9 +46,20 @@ public class TimerScript : MonoBehaviour {
 			}
 		}
 		if (duration < 0) {
+			if (check) {
+				check = false;
+				PlayerPrefs.SetInt ("playCount", 1);
+				//Application.LoadLevelAsync ("Gameplay");
+				//Debug.Log (duration);
+				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
+			}
 			//Application.LoadLevelAsync ("Gameplay");
             asyncOpration.allowSceneActivation = true;
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> imrankhanswati-Abode-First-Person-View
 		}
 
 
@@ -63,10 +78,13 @@ public class TimerScript : MonoBehaviour {
 			poem.SetActive (false);
 			title.SetActive (true);
 		}
+<<<<<<< HEAD
 		if (duration < 0) {
 			PlayerPrefs.SetInt ("playCount", 1);
 			//Application.LoadLevelAsync ("Gameplay");
             asyncOpration.allowSceneActivation = true;
 		}
+=======
+>>>>>>> imrankhanswati-Abode-First-Person-View
 	}
 }
