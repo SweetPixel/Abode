@@ -23,7 +23,7 @@ public class GameController : MonoBehaviour {
     }
 	void Start () {
 		helper = GameObject.Find ("HelpingText");
-		helper.SetActive (false);
+		//helper.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -106,7 +106,6 @@ public class GameController : MonoBehaviour {
     public void LoadNextText(AudioSubtitle audioSub,int currentTextID)
     {
         currentTextID += 1;
-//        Debug.Log(currentTextID);
         try
         {
             if (currentTextID <= audioSub.textForAudio.Length)
