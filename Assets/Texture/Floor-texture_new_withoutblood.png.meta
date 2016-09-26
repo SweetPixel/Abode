@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 03865eb400af3134185f757ba839a5d1
 timeCreated: 1474456057
+=======
+guid: 90962948e59d9044e895ad0cd86098e4
+timeCreated: 1474630223
+>>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}

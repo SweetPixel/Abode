@@ -34,6 +34,7 @@ public class DoorOpen : MonoBehaviour
                 }
             }
         }
+<<<<<<< HEAD
         //if (Physics.Linecast(origin.position, targetFront.position, out hit))
         //{
         //    if (hit.collider.tag == "rightDoorCollider")
@@ -54,4 +55,8 @@ public class DoorOpen : MonoBehaviour
     }
     
 		
+=======
+        Debug.DrawLine(origin.position, targetFront.position, Color.black);
+    }
+>>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 }
