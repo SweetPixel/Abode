@@ -314,6 +314,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "Mobile")
         {
+
             isMobile = true;
         }
 
