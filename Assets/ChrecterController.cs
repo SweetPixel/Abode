@@ -5,38 +5,10 @@ using UnityStandardAssets.Characters.FirstPerson;
 using UnityStandardAssets.Utility;
 
 public class ChrecterController : MonoBehaviour {
-<<<<<<< HEAD
     public float speed = 6.0F;
     public float jumpSpeed = 8.0F;
     public float gravity = 20.0F;
     private Vector3 moveDirection = Vector3.zero;
-=======
-    //public float speed = 6.0F;
-    //public float jumpSpeed = 8.0F;
-    //public float gravity = 20.0F;
-    //private Vector3 moveDirection = Vector3.zero;
->>>>>>> imrankhanswati-Abode-First-Person-View
-
-    //void Update()
-    //{
-    //    CharacterController controller = GetComponent<CharacterController>();
-    //    if (controller.isGrounded)
-    //    {
-    //        if (PlayerMovement.playerDirection == PlayerDirection.FORWARD)
-    //        {
-    //            moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-    //        }
-    //        else
-    //        {
-    //            moveDirection = new Vector3(-(Input.GetAxis("Horizontal")), 0, Input.GetAxis("Vertical"));
-    //        }
-    //        moveDirection = transform.TransformDirection(moveDirection);
-    //        moveDirection *= speed;
-    //    }
-    //    moveDirection.y -= gravity * Time.deltaTime;
-    //    controller.Move(moveDirection * Time.deltaTime);
-    //}
-        //Debug.Log("controller");
 
         [SerializeField] private bool m_IsWalking;
         [SerializeField] private float m_WalkSpeed;
@@ -55,11 +27,9 @@ public class ChrecterController : MonoBehaviour {
         [SerializeField] private AudioClip[] m_FootstepSounds;    // an array of footstep sounds that will be randomly selected from.
         [SerializeField] private AudioClip m_JumpSound;           // the sound played when character leaves the ground.
         [SerializeField] private AudioClip m_LandSound;           // the sound played when character touches back on ground.
-<<<<<<< HEAD
-=======
+
         [SerializeField] private float m_minXRot;
         [SerializeField] private float m_maxXRot;
->>>>>>> imrankhanswati-Abode-First-Person-View
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -94,11 +64,7 @@ public class ChrecterController : MonoBehaviour {
         // Update is called once per frame
         private void Update()
         {
-<<<<<<< HEAD
             RotateView();
-=======
-            RotateView(); 
->>>>>>> imrankhanswati-Abode-First-Person-View
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)
             {
@@ -165,16 +131,12 @@ public class ChrecterController : MonoBehaviour {
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
 
             ProgressStepCycle(speed);
-<<<<<<< HEAD
-            UpdateCameraPosition(speed);
 
-=======
             if (m_Camera.transform.rotation.eulerAngles.x > m_minXRot && m_Camera.transform.rotation.eulerAngles.x < m_maxXRot)
             {
                 UpdateCameraPosition(speed);
                 
             }
->>>>>>> imrankhanswati-Abode-First-Person-View
             m_MouseLook.UpdateCursorLock();
         }
 

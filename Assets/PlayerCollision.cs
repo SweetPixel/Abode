@@ -4,7 +4,7 @@ using System.Collections;
 public class PlayerCollision : MonoBehaviour 
 {
     public float pushPower = 2.0F;
-<<<<<<< HEAD
+
     public Light light;
     public LayerMask mask1;
     public LayerMask mask2;
@@ -24,8 +24,6 @@ public class PlayerCollision : MonoBehaviour
         light.cullingMask = mask2;
         //Debug.Log("Walls exit");
     }
-=======
->>>>>>> imrankhanswati-Abode-First-Person-View
 
     void OnControllerColliderHit(ControllerColliderHit hit)
     {

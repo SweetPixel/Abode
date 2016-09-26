@@ -52,30 +52,6 @@ public class DoorOpen : MonoBehaviour
         //}
         Debug.DrawLine(origin.position, targetFront.position, Color.black);
     }
-<<<<<<< HEAD
-    void OnTriggerExit(Collider coll)
-    {
-        if (coll.tag == "leftDoorCollider" || coll.tag == "leftDoorCollider")
-        {
-            try
-            {
-                if (doorCurrentState == DoorState.OPEN)
-                {
-
-                    openDoorRef.gameObject.GetComponent<OpenDoorScript>().enableDoorClose = true;
-                    openDoorRef = null;
-                    doorCurrentState = DoorState.CLOSE;
-
-                }
-            }
-            catch (Exception e)
-            {
-
-            }
-        }
-    }
-
-
-=======
->>>>>>> imrankhanswati-Abode-First-Person-View
+    
+		
 }
