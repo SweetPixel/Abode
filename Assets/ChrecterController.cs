@@ -30,8 +30,6 @@ public class ChrecterController : MonoBehaviour {
         [SerializeField] private float m_minXRot;
         [SerializeField] private float m_maxXRot;
 
-        [SerializeField] private float m_minXRot;
-        [SerializeField] private float m_maxXRot;
 
         private Camera m_Camera;
         private bool m_Jump;
@@ -133,10 +131,7 @@ public class ChrecterController : MonoBehaviour {
             m_CollisionFlags = m_CharacterController.Move(m_MoveDir*Time.fixedDeltaTime);
 
             ProgressStepCycle(speed);
-<<<<<<< HEAD
 
-=======
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
             if (m_Camera.transform.rotation.eulerAngles.x > m_minXRot && m_Camera.transform.rotation.eulerAngles.x < m_maxXRot)
             {
                 UpdateCameraPosition(speed);

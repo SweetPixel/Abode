@@ -4,24 +4,10 @@ using System.Collections;
 using UnityEngine.UI;
 using XboxCtrlrInput;
 
-<<<<<<< HEAD
-
-public class PlayerMovement : MonoBehaviour
-{
-    public float rotationSpeed = 5f;
-	public float walkSpeed = 5f;
-=======
-//public enum PlayerDirection
-//{
-//    FORWARD,
-//    BACKWORD
-//};
-
 public class PlayerMovement : MonoBehaviour
 {
 	public float walkSpeed = 5f;
 	public float rotationSpeed = 5f;
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 	public float mouseFollow = 45f;
 
     //Lights
@@ -95,82 +81,22 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
     {
-<<<<<<< HEAD
+
         float rotatePosX = Input.GetAxis("Horizontal");
 
         float rotatePostY = Input.GetAxis("Vertical");
 
         Vector3 direction = new Vector3(rotatePosX, rotatePostY, 0f);
-        /*if (Input.GetKey(KeyCode.JoystickButton0) || Input.GetKey(KeyCode.W)) {
-            transform.position += transform.forward * Time.deltaTime * walkSpeed;
-        }
-<<<<<<< HEAD
-
-        if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.W)) {
-            GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
-            gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
-        }
-
-        if (Input.GetKeyUp(KeyCode.JoystickButton0) || Input.GetKeyUp(KeyCode.W)) {
-            gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
-        }*/
-=======
-		float rotatePosX = Input.GetAxis ("Horizontal");
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
-
-		float rotatePostY = Input.GetAxis ("Vertical");
-
-<<<<<<< HEAD
-        if (Input.GetKeyDown(KeyCode.JoystickButton0) || Input.GetKeyDown(KeyCode.W)) {
-            GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
-            gameObject.GetComponent<Animator> ().SetBool ("isMoving", true);
-        }
-
-        if (Input.GetKeyUp(KeyCode.JoystickButton0) || Input.GetKeyUp(KeyCode.W)) {
-            gameObject.GetComponent<Animator> ().SetBool ("isMoving", false);
-        }
-
+        
+		
         currentLerpTime += Time.deltaTime;
-        if (movementAllowed)
-        {
-
-            /*if (rotatePosX > 0) {
-                GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
-            }*/
-            //this.transform.Rotate(0, rotatePosX * rotationSpeed, 0);
-
-            // Generate a plane that intersects the transform's position with an upwards normal.
-            Plane playerPlane = new Plane(Vector3.up, transform.position);
-            // Generate a ray from the cursor position
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            // Determine the point where the cursor ray intersects the plane.
-            // This will be the point that the object must look towards to be looking at the mouse.
-            // Raycasting to a Plane object only gives us a distance, so we'll have to take the distance,
-            //   then find the point along that ray that meets that distance.  This will be the point
-            //   to look at.
-            float hitdist = 0.0f;
-            // If the ray is parallel to the plane, Raycast will return false.
-            if (playerPlane.Raycast(ray, out hitdist))
-            {
-                // Get the point along the ray that hits the calculated distance.
-                Vector3 targetPoint = ray.GetPoint(hitdist);
-
-                // Determine the target rotation.  This is the rotation if the transform looks at the target point.
-                Quaternion targetRotation = Quaternion.LookRotation(targetPoint - transform.position);
-
-            }
-=======
-		Vector3 direction = new Vector3 (rotatePosX, rotatePostY, 0f);
-
-		currentLerpTime += Time.deltaTime;
 
 		if (movementAllowed) {
 
-			if (rotatePosX > 0) {
-				GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
-			}
+			/*if (rotatePosX > 0) {
+                GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "");
+            }*/
 			//this.transform.Rotate(0, rotatePosX * rotationSpeed, 0);
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 
 			// Generate a plane that intersects the transform's position with an upwards normal.
 			Plane playerPlane = new Plane (Vector3.up, transform.position);
@@ -187,64 +113,30 @@ public class PlayerMovement : MonoBehaviour
 				// Get the point along the ray that hits the calculated distance.
 				Vector3 targetPoint = ray.GetPoint (hitdist);
 
-<<<<<<< HEAD
-            if (rotatePosX != 0.0f || rotatePostY != 0.0f)
-            {
-                if (isStart)
-                {
-                    isStart = false;
-                }
-                
-=======
 				// Determine the target rotation.  This is the rotation if the transform looks at the target point.
 				Quaternion targetRotation = Quaternion.LookRotation (targetPoint - transform.position);
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
-
 
 			}
+		}
 
-<<<<<<< HEAD
-		if (Input.GetKey(KeyCode.JoystickButton1) || Input.GetKey(KeyCode.E))
-		{
-
-			/*if (spotLight.GetComponent<FlashLightScript> ().isAvailable && !movementAllowed) {
-=======
-			if (!isStart) {
+		if (!isStart) {
 				controlTimer -= Time.deltaTime;
 				if (controlTimer < 0) {
 					controls.SetActive (false);
 				}
 			}
 
-			if (rotatePosX != 0.0f || rotatePostY != 0.0f) {
+		if (rotatePosX != 0.0f || rotatePostY != 0.0f) {
 				if (isStart) {
 					isStart = false;
 				}
-
-			} else {
+			 else {
 				//gameObject.GetComponent<Animator>().SetBool("isMoving", false);
 			}
-
 		}
 
         if (Input.GetKey(KeyCode.JoystickButton1) || Input.GetKey(KeyCode.E))
         {
-
-
-            /*if (spotLight.GetComponent<FlashLightScript> ().isAvailable && !movementAllowed) {
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
-                audio.clip = Voice2;
-                audio.Play ();
-                movementAllowed = true;
-                spotLight.SetActive (false);
-
-                gameObject.GetComponent<CapsuleCollider> ().enabled = true;
-                if (!flashLight.activeInHierarchy) {
-                    flashLight.SetActive (true);
-
-                }
-                GameObject.Find ("GameController").GetComponent<HelperScript> ().SendMessage ("UpdateText", "Use arrows to Left/Right!");
-            }*/
 
 			if (isMobile)
 			{
@@ -304,7 +196,6 @@ public class PlayerMovement : MonoBehaviour
 	
     public void supriseSound()
     {
-<<<<<<< HEAD
         //Play initial sounds
         StartCoroutine(PlaySounds());
     }
@@ -358,60 +249,6 @@ public class PlayerMovement : MonoBehaviour
 
 	void OnTriggerStay(Collider col)
 	{
-=======
-        playerAudioSource.clip = dialogues[0];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
-
-        playerAudioSource.clip = dialogues[1];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
-
-        playerAudioSource.clip = dialogues[2];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
-
-        playerAudioSource.clip = dialogues[3];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
-
-        playerAudioSource.clip = dialogues[4];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
-
-        playerAudioSource.clip = dialogues[5];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
-
-        playerAudioSource.clip = dialogues[6];
-        playerAudioSource.Play();
-        LoadSubtitle.LoadSubtitle(playerAudioSource.clip);
-        yield return new WaitForSeconds(playerAudioSource.clip.length);
-
-        objectives[1].SetActive(true);
-    }
-
-    void OnTriggerEnter(Collider col)
-    {
-        if (col.gameObject.tag == "Mobile")
-        {
-            isMobile = true;
-        }
-	}
-
-
-
-
-	void OnTriggerStay(Collider col)
-	{
-
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 		if (col.gameObject.tag == "Mobile") {
 			isMobile = true;
 			Debug.Log ("mobile");
@@ -421,17 +258,12 @@ public class PlayerMovement : MonoBehaviour
 			isKey = true;
 			gameController.GetComponent<GameController> ().enableHelper ();
 		}
-<<<<<<< HEAD
-=======
-
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 	}
 
 
 
 	void OnCollisionEnter(Collision col)
 	{
-<<<<<<< HEAD
         if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Doors" || col.gameObject.tag == "Furniture")
         objectives[1].SetActive(true);
     }
@@ -473,31 +305,5 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
-
-    public void OpenDoorToRight(Collider coll)
-    {
-        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<Animator>().SetBool("isRight", true);
-        //coll.gameObject.GetComponent<OpenDoorScript>().isOpen = true;
-        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<DoorController>().doorOpeningDirection = DoorOpeningDirection.OPENINGINSIDE;
-        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<DoorController>().doorState = DoorState.OPEN;
-    }
-
-    public void OpenDoorToLeft(Collider coll)
-    {
-        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<Animator>().SetBool("isLeft", true);
-        //coll.gameObject.GetComponent<OpenDoorScript>().isOpen = true;
-        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<DoorController>().doorOpeningDirection = DoorOpeningDirection.OPENINGINSIDE;
-        //coll.gameObject.GetComponent<OpenDoorScript>().door.GetComponent<DoorController>().doorState = DoorState.OPEN;
-    }
-=======
-        if (col.gameObject.tag == "Walls" || col.gameObject.tag == "Furniture")
-        {
-            walkSpeed = 1;
-        }
-    }
-
-
-   
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 
 }

@@ -10,10 +10,7 @@ public class TimerScript : MonoBehaviour {
 	public GameObject hint;
 	public GameObject skipButton;
 	float audioVolumn = 0.5f;
-<<<<<<< HEAD
 
-=======
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 	private bool check = true;
     AsyncOperation asyncOpration;
 
@@ -57,10 +54,7 @@ public class TimerScript : MonoBehaviour {
 			//Application.LoadLevelAsync ("Gameplay");
             asyncOpration.allowSceneActivation = true;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> imrankhanswati-Abode-Fisrt-Person-View
 		}
 
 
