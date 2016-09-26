@@ -31,12 +31,10 @@ public class GameController : MonoBehaviour {
 
 	public void enableHelper()
 	{
-		helper.SetActive (true);
 	}
 
 	public void disableHelper()
 	{
-		helper.SetActive (false);
 	}
 
 
