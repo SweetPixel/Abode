@@ -34,22 +34,6 @@ public class DoorOpen : MonoBehaviour
                 }
             }
         }
-        //if (Physics.Linecast(origin.position, targetFront.position, out hit))
-        //{
-        //    if (hit.collider.tag == "rightDoorCollider")
-        //    {
-
-        //        gameObject.transform.parent.gameObject.GetComponent<PlayerMovement>().OpenDoorToRight(hit.collider);
-        //        openDoorRef = hit.collider;
-        //        doorCurrentState = DoorState.OPEN;
-        //    }
-        //    else if (hit.collider.tag == "leftDoorCollider")
-        //    {
-        //        gameObject.transform.parent.gameObject.GetComponent<PlayerMovement>().OpenDoorToLeft(hit.collider);
-        //        openDoorRef = hit.collider;
-        //        doorCurrentState = DoorState.OPEN;
-        //    }
-        //}
         Debug.DrawLine(origin.position, targetFront.position, Color.black);
     }
 }
