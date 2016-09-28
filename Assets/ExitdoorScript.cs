@@ -13,11 +13,11 @@ public class ExitdoorScript : MonoBehaviour {
 	void OnTriggerEnter(Collider col)
 	{
 		if (col.gameObject.name == "Player") {
-			if (col.gameObject.GetComponent<PlayerMovement> ().hasKey && gameObject.name == "leftCollider (16)") {
-				door.GetComponent<Animator> ().SetBool ("isRight", true);
+			if (col.gameObject.GetComponent<PlayerMovement> ().hasKey && gameObject.name == "leftCollider (16)"&& col.gameObject.GetComponent<PlayerMovement>().hasMobileAttende) {
+                door.GetComponent<DoorController>().open = true;
 				StartCoroutine (endLevel ());
 				GameObject.Find ("Player").GetComponent<PlayerMovement> ().objectives [2].GetComponent<Image> ().sprite = GameObject.Find ("Player").GetComponent<PlayerMovement> ().objectivesComplete [2];
-			} else if (!col.gameObject.GetComponent<PlayerMovement> ().hasKey && gameObject.name == "leftCollider (16)") {
+			} else if (col.gameObject.GetComponent<PlayerMovement>().hasMobileAttende &&!col.gameObject.GetComponent<PlayerMovement> ().hasKey && gameObject.name == "leftCollider (16)") {
 				gameObject.GetComponent<AudioSource> ().clip = withOutKeyExit;
 				gameObject.GetComponent<AudioSource> ().Play ();
                 controller.LoadSubtitle(gameObject.GetComponent<AudioSource>().clip);

@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;
 
 public class ButtonClick : MonoBehaviour {
 
 	public void restartLevel()
 	{
-		SceneManager.LoadSceneAsync ("Gameplay");
+		Application.LoadLevelAsync ("Gameplay");
 	}
 
 	public void QuitGame()

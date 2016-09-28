@@ -46,6 +46,11 @@ public class PauseMenueController : MonoBehaviour
 
     }
 
+    public void Exit()
+    {
+        Application.Quit();
+    }
+
     void EnableAudio()
     {
         for (int i = 0; i < AudioSourceContainingObjects.Length; i++)

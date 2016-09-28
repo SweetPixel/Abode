@@ -10,13 +10,15 @@ public class TimerScript : MonoBehaviour {
 	public GameObject hint;
 	public GameObject skipButton;
 	float audioVolumn = 0.5f;
-	private bool check = true;
+    AsyncOperation asyncOpration;
 
 	private bool isSkipped = false;
 
 	// Use this for initialization
 	void Start () {
 		skipButton.SetActive (false);
+        asyncOpration = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync("Gameplay");
+        asyncOpration.allowSceneActivation = false;
 	}
 	
 	// Update is called once per frame
@@ -28,6 +30,7 @@ public class TimerScript : MonoBehaviour {
 		if (duration < 21) {
 			if (!GameObject.Find ("GameController").GetComponent<AudioSource> ().isPlaying) {
 				GameObject.Find("GameController").GetComponent<AudioSource> ().Play ();
+                Debug.Log("audio");
 			}
 
 			hint.SetActive (false);
@@ -39,13 +42,9 @@ public class TimerScript : MonoBehaviour {
 			}
 		}
 		if (duration < 0) {
-			if (check) {
-				check = false;
-				PlayerPrefs.SetInt ("playCount", 1);
-				//Application.LoadLevelAsync ("Gameplay");
-				//Debug.Log (duration);
-				UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
-			}
+			//Application.LoadLevelAsync ("Gameplay");
+            asyncOpration.allowSceneActivation = true;
+			
 		}
 
 
@@ -64,11 +63,10 @@ public class TimerScript : MonoBehaviour {
 			poem.SetActive (false);
 			title.SetActive (true);
 		}
-//		if (duration < 0) {
-//			
-//			//Application.LoadLevelAsync ("Gameplay");
-//			Debug.Log (duration);
-//			UnityEngine.SceneManagement.SceneManager.LoadSceneAsync ("Gameplay");
-//		}
+		if (duration < 0) {
+			PlayerPrefs.SetInt ("playCount", 1);
+			//Application.LoadLevelAsync ("Gameplay");
+            asyncOpration.allowSceneActivation = true;
+		}
 	}
 }

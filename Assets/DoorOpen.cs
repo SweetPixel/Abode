@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class DoorOpen : MonoBehaviour
 {
@@ -8,9 +9,10 @@ public class DoorOpen : MonoBehaviour
     public float rayLenght;
     private Ray DoorOpenerRay;
     private RaycastHit hit;
-
     private Collider openDoorRef;
     private DoorState doorCurrentState;
+
+    public GameController gameController;
 
     void Start()
     {
@@ -21,35 +23,38 @@ public class DoorOpen : MonoBehaviour
     {
         if (Physics.Linecast(origin.position, targetFront.position, out hit))
         {
-            if (hit.collider.tag == "rightDoorCollider")
+            if (hit.collider.tag == "DoorInsideCollider")
             {
-
-                gameObject.transform.parent.gameObject.GetComponent<PlayerMovement>().OpenDoorToRight(hit.collider);
-                openDoorRef = hit.collider;
-                doorCurrentState = DoorState.OPEN;
+                gameController.GetComponent<GameController>().enableHelper();
+                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    hit.collider.transform.parent.transform.parent.GetComponent<DoorController>().OpenDoorOutside();
+                }
             }
-            else if (hit.collider.tag == "leftDoorCollider")
+            else if (hit.collider.tag == "DoorOutsideCollider")
             {
-                gameObject.transform.parent.gameObject.GetComponent<PlayerMovement>().OpenDoorToLeft(hit.collider);
-                openDoorRef = hit.collider;
-                doorCurrentState = DoorState.OPEN;
+                gameController.GetComponent<GameController>().enableHelper();
+                if (Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0))
+                {
+                    hit.collider.transform.transform.parent.parent.GetComponent<DoorController>().OpenDoorInside();
+                }
+            }
+            else
+            {
+                if (gameController.isHelperEnabled && gameController.isHelperEnabledByOther == false)
+                {
+                    gameController.GetComponent<GameController>().disableHelper();
+                }
             }
         }
+        else
+        {
+            if (gameController.isHelperEnabled && gameController.isHelperEnabledByOther == false)
+            {
+                gameController.GetComponent<GameController>().disableHelper();
+            }
+        }
+
         Debug.DrawLine(origin.position, targetFront.position, Color.black);
     }
-    void OnTriggerExit(Collider coll)
-    {
-        if (coll.tag == "leftDoorCollider" || coll.tag == "leftDoorCollider")
-        {
-            if (doorCurrentState == DoorState.OPEN)
-            {
-                openDoorRef.gameObject.GetComponent<OpenDoorScript>().enableDoorClose = true;
-                openDoorRef = null;
-                doorCurrentState = DoorState.CLOSE;
-                Debug.Log("close Door");
-            }
-        }
-    }
-
-
 }

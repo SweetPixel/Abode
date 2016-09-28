@@ -5,6 +5,8 @@ public class FlashLightScript : MonoBehaviour {
 
 	public bool isAvailable =false;
 	private GameObject gameController;
+    [SerializeField]
+    private GameObject helperCanvas;
 
 	// Use this for initialization
 	void Start () {
@@ -15,14 +17,12 @@ public class FlashLightScript : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Player") {
 			isAvailable = true;
-			gameController.GetComponent<GameController> ().enableHelper ();
 		}
 
 	}
 
 	void OnTriggerExit(Collider col)
 	{
-		gameController.GetComponent<GameController> ().disableHelper ();
 		isAvailable = false;
 	}
 

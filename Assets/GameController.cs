@@ -4,6 +4,10 @@ using UnityEngine.UI;
 using System;
 
 public class GameController : MonoBehaviour {
+
+    public bool isHelperEnabled = false;
+    public bool isHelperEnabledByOther = false;//this checkes if helper is enabled by either mobile or key then door is not allowed to disable helper.
+
     [Header("Audio Objects")]
     public static GameObject[] ObjectsHavingAudio;
 
@@ -13,7 +17,7 @@ public class GameController : MonoBehaviour {
     public AudioSubtitle[] audioSub;
     public Text subTitleText;
 
-	private GameObject helper;
+	public GameObject helper;
 
 	// Use this for initialization
 
@@ -22,8 +26,7 @@ public class GameController : MonoBehaviour {
         this.LoadSubtitle(this.gameObject.GetComponent<AudioSource>().clip);
     }
 	void Start () {
-		helper = GameObject.Find ("HelpingText");
-		helper.SetActive (false);
+		//helper.SetActive (false);
 	}
 	
 	// Update is called once per frame
@@ -31,15 +34,28 @@ public class GameController : MonoBehaviour {
 
 	public void enableHelper()
 	{
-		helper.SetActive (true);
+        helper.SetActive(true);
+        isHelperEnabled = true;
 	}
 
+    public void enableHelper(string objectname)
+    {
+        helper.SetActive(true);
+        isHelperEnabledByOther = true;
+        isHelperEnabled = true;
+    }
 	public void disableHelper()
 	{
-		helper.SetActive (false);
+        helper.SetActive(false);
+        isHelperEnabled = false;
 	}
 
-
+    public void disableHelper(string objectname)
+    {
+        helper.SetActive(false);
+        isHelperEnabledByOther = false;
+        isHelperEnabled = false;
+    }
 
     public static void EnableAllAudios()
     {
@@ -106,7 +122,7 @@ public class GameController : MonoBehaviour {
     public void LoadNextText(AudioSubtitle audioSub,int currentTextID)
     {
         currentTextID += 1;
-//        Debug.Log(currentTextID);
+        //Debug.Log(currentTextID);
         try
         {
             if (currentTextID <= audioSub.textForAudio.Length)
