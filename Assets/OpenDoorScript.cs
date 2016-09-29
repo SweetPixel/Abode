@@ -1,11 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public enum DoorState
-{
-    OPEN,
-    CLOSE
-};
 
 public class OpenDoorScript : MonoBehaviour {
 

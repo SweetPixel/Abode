@@ -17,16 +17,12 @@ public class FlashLightScript : MonoBehaviour {
 	{
 		if (col.gameObject.tag == "Player") {
 			isAvailable = true;
-            helperCanvas.SetActive(true);
-			//gameController.GetComponent<GameController> ().enableHelper ();
 		}
 
 	}
 
 	void OnTriggerExit(Collider col)
 	{
-        helperCanvas.SetActive(false);
-		//gameController.GetComponent<GameController> ().disableHelper ();
 		isAvailable = false;
 	}
 

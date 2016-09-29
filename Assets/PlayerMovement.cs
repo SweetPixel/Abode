@@ -212,7 +212,7 @@ public class PlayerMovement : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Mobile").SetActive(false);
                 isMobile = false;
                 hasMobileAttende = true;
-                gameController.GetComponent<GameController>().disableHelper();
+                gameController.GetComponent<GameController>().disableHelper("Mobile");
                 StartCoroutine(PlayAllDialogues());
                 objectives[0].GetComponent<Image>().sprite = objectivesComplete[0];
             }
@@ -221,6 +221,7 @@ public class PlayerMovement : MonoBehaviour
                 isPoemPlayed = true;
                 StartCoroutine(keySounds());
                 hasKey = true;
+                gameController.GetComponent<GameController>().disableHelper("Key");
                 objectives[2].GetComponent<Image>().sprite = objectivesComplete[2];
                 key.SetActive(false);
             }
@@ -314,14 +315,14 @@ public class PlayerMovement : MonoBehaviour
     {
         if (col.gameObject.tag == "Mobile")
         {
-
-            isMobile = true;
+             isMobile = true;
+             gameController.GetComponent<GameController>().enableHelper("Mobile");
         }
 
         if (col.gameObject.tag == "Key")
         {
             isKey = true;
-            gameController.GetComponent<GameController>().enableHelper();
+            gameController.GetComponent<GameController>().enableHelper("Key");
         }
     }
 
@@ -330,28 +331,20 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.tag == "Mobile")
         {
             isMobile = false;
+            gameController.GetComponent<GameController>().disableHelper("Mobile");
+            Debug.Log(col.gameObject.tag);
         }
 
         if (col.gameObject.tag == "Key")
         {
             isKey = false;
-            gameController.GetComponent<GameController>().disableHelper();
+            gameController.GetComponent<GameController>().disableHelper("Key");
+            Debug.Log(col.gameObject.tag);
         }
 
         if (col.gameObject.tag == "rightDoorCollider" || col.gameObject.tag == "leftDoorCollider")
         {
             gameController.GetComponent<GameController>().disableHelper();
-        }
-
-        if (col.gameObject.tag == "Mobile")
-        {
-            isMobile = false;
-        }
-
-        if (col.gameObject.tag == "Key")
-        {
-            isKey = false;
-            gameController.GetComponent<GameController>().enableHelper();
         }
 
     }

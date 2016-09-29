@@ -6,6 +6,14 @@ public enum OpeningDirection
     INSIDE,
     OUTSIDE
 };
+
+public enum DoorState
+{
+    OPEN,
+    OPENING,
+    CLOSE,
+    CLOSEING
+};
 public class DoorController : MonoBehaviour {
 
     public bool open = false;
@@ -16,6 +24,7 @@ public class DoorController : MonoBehaviour {
     public bool AutoClose = false;
     public float autocloseIntervalTime = 1f;
     public AudioSource doorSoundAudioSource;
+    public DoorState state = DoorState.CLOSE;
 
 	// Use this for initialization
 	void Start () {
@@ -30,19 +39,43 @@ public class DoorController : MonoBehaviour {
         {
             if (openingDirection == OpeningDirection.INSIDE)
             {
-                Quaternion openingRotation = Quaternion.Euler(0, openingAngle, 0);
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, openingRotation, openingTime * Time.deltaTime);
+                //if (state == DoorState.OPENING)
+                //{
+                    Quaternion openingRotation = Quaternion.Euler(0, openingAngle, 0);
+                    transform.localRotation = Quaternion.Slerp(transform.localRotation, openingRotation, openingTime * Time.deltaTime);
+                    state = DoorState.OPENING;
+                //    if (transform.localRotation.y <= -0.65f)
+                //    {
+                //        StartCoroutine(this.ChangingState(DoorState.OPEN));
+                //    }
+                //}
             }
             else
             {
-                Quaternion openingRotation = Quaternion.Euler(0, -openingAngle, 0);
-                transform.localRotation = Quaternion.Slerp(transform.localRotation, openingRotation, openingTime * Time.deltaTime);
+                //if (state == DoorState.OPENING)
+                //{
+                    Quaternion openingRotation = Quaternion.Euler(0, -openingAngle, 0);
+                    transform.localRotation = Quaternion.Slerp(transform.localRotation, openingRotation, openingTime * Time.deltaTime);
+                    state = DoorState.OPENING;
+                //    if (transform.localRotation.y >= 0.65f)
+                //    {
+                //        StartCoroutine(this.ChangingState(DoorState.OPEN));
+                //    }
+                //}
             }
         }
         else
         {
-            Quaternion closingRotation = Quaternion.Euler(0, closingAngle, 0);
-            transform.localRotation = Quaternion.Slerp(transform.localRotation, closingRotation, openingTime*Time.deltaTime);
+            //if (state == DoorState.CLOSEING)
+            //{
+                Quaternion closingRotation = Quaternion.Euler(0, closingAngle, 0);
+                transform.localRotation = Quaternion.Slerp(transform.localRotation, closingRotation, openingTime * Time.deltaTime);
+                state = DoorState.CLOSEING;
+                //if (transform.localRotation.y <= 0.05f)
+                //{
+                //    StartCoroutine(ChangingState(DoorState.CLOSE));
+                //}
+            //}
         }
     }
 
@@ -61,16 +94,26 @@ public class DoorController : MonoBehaviour {
         open = false;
     }
 
+    //IEnumerator ChangingState(DoorState s)
+    //{
+    //    yield return new WaitForSeconds(0.3f);
+    //    state = s;
+        
+    //}
+
     public void OpenDoorInside()
     {
         openingDirection = OpeningDirection.INSIDE;
+        
         this.changeState();
         if (open)
         {
+            //state = DoorState.OPENING;
             doorSoundAudioSource.Play();
         }
         else
         {
+            //state = DoorState.CLOSEING;
             doorSoundAudioSource.Play();
         }
     }
@@ -78,14 +121,22 @@ public class DoorController : MonoBehaviour {
     public void OpenDoorOutside()
     {
         openingDirection = OpeningDirection.OUTSIDE;
+        state = DoorState.OPENING;
         this.changeState();
         if (open)
         {
+            //state = DoorState.OPENING;
             doorSoundAudioSource.Play();
         }
         else
         {
+            //state = DoorState.CLOSEING;
             doorSoundAudioSource.Play();
         }
+    }
+
+    public void DoorMovingState(DoorState ChangeState)
+    {
+        state = ChangeState;
     }
 }
