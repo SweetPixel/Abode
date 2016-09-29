@@ -12,6 +12,7 @@ public class ExitdoorScript : MonoBehaviour {
 
 	void OnTriggerEnter(Collider col)
 	{
+        Debug.Log(col.name);
 		if (col.gameObject.name == "Player") {
 			if (col.gameObject.GetComponent<PlayerMovement> ().hasKey && gameObject.name == "leftCollider (16)"&& col.gameObject.GetComponent<PlayerMovement>().hasMobileAttende) {
                 door.GetComponent<DoorController>().open = true;
